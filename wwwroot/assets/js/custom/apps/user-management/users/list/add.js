@@ -73,11 +73,9 @@ var KTUsersAddUser = function () {
                         }
 
                         var formData = {
-                            image: $('#Image').get(0).files[0],
                             playerName: $('#PlayerName').val(),
                             playerName: $('#PlayerName').val(),
                             emailAddress: $('#EmailAddress').val(),
-                            roleId: $('#RoleId').val(),
                             teamId: $('#TeamId').val(),
                             isclubpassPlayer: isclub,
                         };
@@ -86,12 +84,7 @@ var KTUsersAddUser = function () {
                         $.ajax({
                             type: "POST",
                             url: '/Player/AddPlayer',
-                            contentType: false, 
-                            processData: false,
                             data: formData,
-                            dataType: 'json',
-                            cache: false,
-
                             success: function (data) {
                                 if (data) {
                                     // Show popup confirmation 

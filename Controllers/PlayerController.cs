@@ -83,17 +83,6 @@ namespace SchedulingApplication.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPlayer(PlayerModel model)
         {
-
-            string wwwRootPath = _env.WebRootPath;
-            string fileName = Path.GetFileNameWithoutExtension(model.ImageFile?.FileName);
-            string extension = Path.GetExtension(model.ImageFile.FileName);
-            model.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-            using (var fileStream = new FileStream(path, FileMode.Create))
-            {
-                await model.ImageFile.CopyToAsync(fileStream);
-            }
-
             var data = _mapper.Map<Player>(model);
             var result = await _playerServices.AddPlayer(data);
 
