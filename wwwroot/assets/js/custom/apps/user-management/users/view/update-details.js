@@ -55,7 +55,7 @@ var KTUsersUpdateDetails = function () {
                 }));
                 const o = t.querySelector('[data-kt-users-modal-action="submit"]');
                 o.addEventListener("click", (function (t) {
-
+                    debugger;
                     if ($('#IsClubPassPlayer').prop('checked')) {
                         var isclub = true;
                     }
@@ -63,19 +63,24 @@ var KTUsersUpdateDetails = function () {
                         isclub = false;
                     }
 
-                    var formData = {
-                        id: $('#Id').val(),
-                        playerName: $('#PlayerName').val(),
-                        emailAddress: $('#EmailAddress').val(),
-                        age: $('#Age').val(),
-                        teamId: $('#TeamId').val(),
-                        isclubpassPlayer: isclub,
-                    };
+                    
+
+                    var formData = new FormData($('#kt_modal_update_user_form')[0]);// form Id - formUploadInvoice
+                    formData.append('baseImage', $('input[type=file]')[0].files[0]);
+                    formData.append('id', $('#Id').val());
+                    formData.append('playerName', $('#PlayerName').val());
+                    formData.append('emailAddress', $('#EmailAddress').val());
+                    formData.append('teamId', $('#TeamId').val());
+                    formData.append('age', $('#Age').val());
+                    formData.append('isclubpassPlayer', isclub);
+
                     console.log(formData);
                     $.ajax({
                         type: "POST",
-                        url: '/Player/UpdatePlayer/{id}',
+                        url: '/Player/AddPlayer',
                         data: formData,
+                        contentType: false,
+                        processData: false,
                         success: function (data) {
                             
                         }

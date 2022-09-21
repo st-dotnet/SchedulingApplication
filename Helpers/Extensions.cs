@@ -11,5 +11,23 @@
 
             return defaultId;
         }
+
+        public static string ToBase64String(this IFormFile formFile)
+        {
+            if (formFile == null) return String.Empty;
+
+            var bytes = GetBytes(formFile);
+
+            return Convert.ToBase64String(bytes);
+        }
+
+        private static byte[] GetBytes(IFormFile formFile)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                formFile.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            } 
+        }
     }
 }

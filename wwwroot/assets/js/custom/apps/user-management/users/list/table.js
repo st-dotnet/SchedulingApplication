@@ -82,6 +82,12 @@ var KTUsersList = function () {
             c.forEach((e) => {
                 e.addEventListener("click", function () {
                     debugger;
+
+                    $("#checkAll").click(function () {
+                        $(".checkBox").prop('checked',
+                            $(this).prop('checked'));
+                    });
+
                     setTimeout(function () {
                         a();
                     }, 50);
@@ -97,9 +103,34 @@ var KTUsersList = function () {
                         cancelButtonText: "No, cancel",
                         customClass: { confirmButton: "btn fw-bold btn-danger", cancelButton: "btn fw-bold btn-active-light-primary" },
                     }).then(function (t) {
-                        debugger; s
+                        debugger;
+
+                        var selectedIDs = new Array();
+                        $('input:checkbox.checkBox').each(function () {
+                            if ($(this).prop('checked')) {
+                                selectedIDs.push($(this).attr('data-id'));
+                            }
+                        });
+                        debugger;
+                        var postData = { values: selectedIDs }
+                        console.log(postData);
+                        $.ajax({
+                            "url": "/Player/DeleteMultiplePlayer/",
+                            "type": "POST",
+                            "data": postData,
+                            "dataType": "json",
+                            success: function (data) {
+                                if (data.success) {
+                                    debugger;
+
+                                }
+                            },
+                            "traditional": true,
+                        }),
+
                         t.value
-                            ? Swal.fire({ text: "You have deleted all selected customers!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
+                            ? 
+                            Swal.fire({ text: "You have deleted all selected customers!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
                                 .then(function () {
                                     c.forEach((t) => {
                                         t.checked &&
@@ -154,10 +185,23 @@ var KTUsersList = function () {
                                 {
                                     "data": "id",
                                     "render": function (data, type, row, meta) { 
-                                        return `<div class='form-check form-check-sm form-check-custom form-check-solid'><input class='form-check-input' type='checkbox' value='${data}'></div>`;
+                                        return `<div class='form-check form-check-sm form-check-custom form-check-solid'><input id="checkBoxId" class='form-check-input checkBox' type='checkbox' data-id=${row.id}></div>`;
+                                    }
+                                }, 
+                                {
+                                    "data": "emailAddress",
+                                    "render": function (data, type, row, meta) {
+                                        return `<div class='symbol symbol-circle symbol-50px overflow-hidden me-3' >
+		                                                <div class='symbol-label'>
+                                                            <img src="data:image/png;base64, ${row.image}" alt="${row.playerName}" />
+		                                                </div>
+                                                </div>
+                                                <div class='d-flex flex-column'>
+	                                                <a href='#' class='text-gray-800 text-hover-primary mb-1'>${row.playerName}</a>
+	                                                <span>${data}</span>
+                                                </div>`
                                     }
                                 },
-                                { "data": "emailAddress", "name": "email", "autoWidth": true },
                                 { "data": "playerName", "name": "Name", "autoWidth": true },
                                 { "data": "age", "name": "Age", "autoWidth": true },
                                 { "data": "team", "name": "Team", "autoWidth": true },
@@ -193,6 +237,7 @@ var KTUsersList = function () {
                     }),
                     l(),
                     document.querySelector('[data-kt-user-table-filter="search"]').addEventListener("keyup", function (t) {
+                       debugger;
                         datatable.search(t.target.value).draw();
                     }),
                     document.querySelector('[data-kt-user-table-filter="reset"]').addEventListener("click", function () {

@@ -30,9 +30,8 @@ var KTSigninGeneral = function () {
                     })
                 }
             }), e.addEventListener("click", (function (n) {
+                debugger;
                 n.preventDefault(), i.validate().then((function (i) {
-                    debugger;
-                    alert("Hello1");
 
                     var signInformData = {
                         email: $('#Email').val(),
@@ -40,8 +39,17 @@ var KTSigninGeneral = function () {
                     };
 
                     console.log(signInformData);
+
+                    $.ajax({
+                        url: '/LogIn/LogInUser/',
+                        type: 'POST',
+                        data: signInformData,
+                        success: function (data) {
+
+                        },
+                    });
+
                     "Valid" == i ? (e.setAttribute("data-kt-indicator", "on"), e.disabled = !0, setTimeout((function () {
-                        alert("Hello2");
                         e.removeAttribute("data-kt-indicator"), e.disabled = !1, Swal.fire({
                             text: "You have successfully logged in!",
                             icon: "success",
@@ -52,6 +60,7 @@ var KTSigninGeneral = function () {
                             }
                         }).then((function (e) {
                             e.isConfirmed && (t.querySelector('[name="email"]').value = "", t.querySelector('[name="password"]').value = "")
+                            window.location="/Player/Index"
                         }))
                     }), 2e3)) : Swal.fire({
                         text: "Sorry, looks like there are some errors detected, please try again.",

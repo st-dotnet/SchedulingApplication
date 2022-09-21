@@ -34,21 +34,21 @@ namespace SchedulingApplication.Models
         /// </summary>
         [JsonProperty(PropertyName = "data")]
         [JsonPropertyName("data")]
-        public IEnumerable<T> Data { get; set; }
+        public IEnumerable<T>? Data { get; set; }
     }
     public class Column
     {
-        public object Data { get; set; }
-        public string Name { get; set; }
+        public object? Data { get; set; }
+        public string? Name { get; set; }
         public bool Searchable { get; set; }
         public bool Orderable { get; set; }
-        public Search Search { get; set; }
+        public Search? Search { get; set; }
     }
 
     public class Order
     {
         public int Column { get; set; }
-        public string Dir { get; set; }
+        public string? Dir { get; set; }
     }
 
     public class JqueryDataTablesParameters
@@ -100,7 +100,7 @@ namespace SchedulingApplication.Models
 
     public class Search
     {
-        public string Value { get; set; }
+        public string? Value { get; set; }
         public bool Regex { get; set; }
     }
 }

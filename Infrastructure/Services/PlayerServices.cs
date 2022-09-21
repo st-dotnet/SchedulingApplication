@@ -1,18 +1,25 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using SchedulingApplication.Data;
 using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Infrastructure.Interface;
+using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Infrastructure.Services
 {
     public class PlayerServices : IPlayerServices
     {
         private readonly SchedulingApplicationContext _dbContext;
-        
-        public PlayerServices(SchedulingApplicationContext dbContext)
+        private readonly IWebHostEnvironment _env;
+        private readonly IMapper _mapper;
+
+        public PlayerServices(SchedulingApplicationContext dbContext, 
+            IWebHostEnvironment env,
+            IMapper mapper)
         {
             _dbContext = dbContext;
-            
+            _env = env;
+            _mapper = mapper;
         }
 
         public async Task<bool> AddPlayer(Player entity)
@@ -28,6 +35,7 @@ namespace SchedulingApplication.Infrastructure.Services
                     playerFromDb.TeamId = entity.TeamId;
                     playerFromDb.EmailAddress = entity.EmailAddress;
                     playerFromDb.IsClubPassPlayer = entity.IsClubPassPlayer;
+                    playerFromDb.Image = entity.Image;
 
                     await _dbContext.SaveChangesAsync();
                 }
@@ -39,10 +47,6 @@ namespace SchedulingApplication.Infrastructure.Services
                     #region Register user
                     if (!players.Any(e => e.EmailAddress == entity.EmailAddress))
                     {
-                        //var filepath = Path.Combine(_env.WebRootPath,"upload");
-                        //using var stream = new FileStream(filepath, FileMode.Create);   
-                        //await formFile.CopyToAsync(stream); 
-
                         entity.CreatedOn = DateTime.Now;
                         entity.UpdatedOn = DateTime.Now;
                         entity.CreatedBy = entity.Id;
@@ -60,7 +64,7 @@ namespace SchedulingApplication.Infrastructure.Services
             catch (Exception ex)
             {
 
-                throw ex;
+                throw new Exception($"Error occured: {ex}");
             }
         }
 
@@ -82,11 +86,54 @@ namespace SchedulingApplication.Infrastructure.Services
             }
         }
 
+        public async Task<bool> DeletePlayers(List<int> playersIds)
+        {
+            try
+            {
+                foreach (int playerId in playersIds)
+                {
+                    var objPlayer = _dbContext.Players.FirstOrDefault(e => e.Id == playerId);
+
+                    if (objPlayer == null)
+                        throw new Exception("This player doesn't exist.");
+
+                    _dbContext.Players.Remove(objPlayer);
+                }
+                return await _dbContext.SaveChangesAsync() > 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
+        }
+
         public List<Player> GetAllPlayers()
         {
             return _dbContext.Players
                 .Include(x => x.Team)
                 .ToList();
+        }
+
+        public JqueryDataTablesResult<PlayerModel> GetAllPlayers(JqueryDataTablesParameters request)
+        {
+            var query = _dbContext.Players.Include(x => x.Team).AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.SearchValue))
+            {
+                query = query.Where(x => x.PlayerName.Contains(request.SearchValue) || (x.Team != null && x.Team.Name.Contains(request.SearchValue)));
+            }
+
+            var result = _mapper.Map<List<PlayerModel>>(query.ToList());
+            var total = result.Count();
+            var items = result.Skip(request.Start).Take(request.Length).ToList();
+            return new JqueryDataTablesResult<PlayerModel>
+            {
+                RecordsTotal = total,
+                Data = items,
+                Draw = request.Draw == 0 ? 1 : request.Draw
+            };
         }
 
         public Player? GetPlayerDetails(int playerId)
@@ -97,7 +144,7 @@ namespace SchedulingApplication.Infrastructure.Services
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"Error occured: {ex}");
             }
         }
 
@@ -110,7 +157,7 @@ namespace SchedulingApplication.Infrastructure.Services
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"Error occured: {ex}");
             }
         }
     }

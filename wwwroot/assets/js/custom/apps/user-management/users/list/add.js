@@ -64,34 +64,29 @@ var KTUsersAddUser = function () {
                         // Disable button to avoid multiple click 
                         submitButton.disabled = true;
 
-
+                        
                         if ($('#IsClubPassPlayer').prop('checked')) {
                             var isclub = true;
                         }
                         else {
                             isclub = false;
                         }
-
-                        var formData = {
-                            image: $('#Image').get(0).files[0],
-                            playerName: $('#PlayerName').val(),
-                            playerName: $('#PlayerName').val(),
-                            emailAddress: $('#EmailAddress').val(),
-                            roleId: $('#RoleId').val(),
-                            teamId: $('#TeamId').val(),
-                            isclubpassPlayer: isclub,
-                        };
+                        debugger;
+                        var formData = new FormData($('#kt_modal_add_user_form')[0]);// form Id - formUploadInvoice
+                        formData.append('baseImage', $('input[type=file]')[0].files[0]);
+                        formData.append('playerName', $('#PlayerName').val());
+                        formData.append('emailAddress', $('#EmailAddress').val());
+                        formData.append('teamId', $('#TeamId').val());
+                        formData.append('age', $('#Age').val());
+                        formData.append('isclubpassPlayer', isclub);
 
                         console.log(formData);
                         $.ajax({
                             type: "POST",
                             url: '/Player/AddPlayer',
-                            contentType: false, 
-                            processData: false,
                             data: formData,
-                            dataType: 'json',
-                            cache: false,
-
+                            contentType: false,
+                            processData: false,
                             success: function (data) {
                                 if (data) {
                                     // Show popup confirmation 
@@ -129,8 +124,6 @@ var KTUsersAddUser = function () {
 
                                         // Enable button
                                         submitButton.disabled = false;
-
-
 
                                         //form.submit(); // Submit form
                                     }, 2000);
