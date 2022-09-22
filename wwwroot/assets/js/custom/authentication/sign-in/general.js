@@ -30,47 +30,49 @@ var KTSigninGeneral = function () {
                     })
                 }
             }), e.addEventListener("click", (function (n) {
-                debugger;
                 n.preventDefault(), i.validate().then((function (i) {
 
                     var signInformData = {
                         email: $('#Email').val(),
                         password: $('#Password').val(),
                     };
-
+                    debugger;
                     console.log(signInformData);
-
                     $.ajax({
                         url: '/LogIn/LogInUser/',
                         type: 'POST',
                         data: signInformData,
-                        success: function (data) {
-
+                        success: function (response) {
+                            if (response.result == true) {
+                                debugger;
+                                (e.setAttribute("data-kt-indicator", "on"), e.disabled = !0, setTimeout((function () {
+                                    e.removeAttribute("data-kt-indicator"), e.disabled = !1, Swal.fire({
+                                        text: "You have successfully logged in!",
+                                        icon: "success",
+                                        buttonsStyling: !1,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    }).then((function (e) {
+                                        e.isConfirmed && (t.querySelector('[name="email"]').value = "", t.querySelector('[name="password"]').value = "")
+                                        window.location = "/Player/Index"
+                                    }))
+                                }), 2e3))
+                            }
+                            else {
+                                Swal.fire({
+                                    text: "Sorry, You have entered wrong UserName and Password, please try again.",
+                                    icon: "error",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                })
+                            }
                         },
                     });
-
-                    "Valid" == i ? (e.setAttribute("data-kt-indicator", "on"), e.disabled = !0, setTimeout((function () {
-                        e.removeAttribute("data-kt-indicator"), e.disabled = !1, Swal.fire({
-                            text: "You have successfully logged in!",
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        }).then((function (e) {
-                            e.isConfirmed && (t.querySelector('[name="email"]').value = "", t.querySelector('[name="password"]').value = "")
-                            window.location="/Player/Index"
-                        }))
-                    }), 2e3)) : Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
-                        icon: "error",
-                        buttonsStyling: !1,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    })
                 }))
             }))
         }

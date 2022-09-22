@@ -29,7 +29,7 @@ namespace SchedulingApplication.Controllers
                 var result = await _logInServices.LogIn(model);
                 return Json(new
                 {
-                    Success = result
+                   result
                 });
             }
             catch (Exception)

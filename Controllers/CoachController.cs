@@ -58,16 +58,9 @@ namespace SchedulingApplication.Controllers
         {
             try
             {
-                var players = _coachServices.GetAllCoachdetails();
-                var result = _mapper.Map<List<CoachModel>>(players);
-                var total = result.Count();
-                var items = result.Skip(model.Start).Take(model.Length).ToList();
-                return Json(new JqueryDataTablesResult<CoachModel>
-                {
-                    RecordsTotal = total,
-                    Data = items,
-                    Draw = 1
-                });
+                var coaches = _coachServices.GetAllCoachdetails(model);
+
+                return Json(coaches);
             }
             catch (Exception ex)
             {
