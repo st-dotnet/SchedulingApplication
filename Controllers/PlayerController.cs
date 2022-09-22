@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SchedulingApplication.Data.Entities;
+using SchedulingApplication.Helpers;
 using SchedulingApplication.Infrastructure.Interface;
 using SchedulingApplication.Models;
-using System.Collections.Generic;
-using System.IO;
 
 
 namespace SchedulingApplication.Controllers
@@ -14,14 +13,11 @@ namespace SchedulingApplication.Controllers
     {
         private readonly IPlayerServices _playerServices;
         private readonly IMapper _mapper;
-        private readonly IWebHostEnvironment _env;
-        private readonly IFormFile formFile;
 
-        public PlayerController(IPlayerServices playerServices, IMapper mapper, IWebHostEnvironment webHostEnvironment)
+        public PlayerController(IPlayerServices playerServices, IMapper mapper)
         {
             _playerServices = playerServices;
             _mapper = mapper;
-            _env = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -40,17 +36,9 @@ namespace SchedulingApplication.Controllers
         public IActionResult GetPlayers(JqueryDataTablesParameters model)
         {
             try
-            {
-                var players = _playerServices.GetAllPlayers();
-                var result = _mapper.Map<List<PlayerModel>>(players); 
-                var total = result.Count();
-                var items = result.Skip(model.Start).Take(model.Length).ToList();
-                return Json(new JqueryDataTablesResult<PlayerModel>
-                {
-                    RecordsTotal = total,
-                    Data = items,
-                    Draw = 1
-                });
+            {   
+                var result = _playerServices.GetAllPlayers(model);
+                return Json(result);
             }
             catch (Exception ex)
             {
@@ -71,7 +59,7 @@ namespace SchedulingApplication.Controllers
                     }).ToList();
 
                 var player =  _playerServices?.GetPlayerDetails(id);
-                var playerModel = _mapper.Map<PlayerModel>(player);
+                var playerModel = _mapper.Map<PlayerModel>(player); 
                 return View(playerModel);
             }
             catch (Exception)
@@ -82,21 +70,12 @@ namespace SchedulingApplication.Controllers
 
         [HttpPost]
         public async Task<IActionResult> AddPlayer(PlayerModel model)
-        {
+        {  
+            // get data model
             var data = _mapper.Map<Player>(model);
-            var result = await _playerServices.AddPlayer(data);
+            data.Image = model.BaseImage?.ToBase64String();
 
-            return Json(new
-            {
-                Success = result
-            });
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> UpdatePlayer(PlayerModel model)
-        {
-
-            var data = _mapper.Map<Player>(model);
+            // call service
             var result = await _playerServices.AddPlayer(data);
 
             return Json(new
@@ -117,5 +96,22 @@ namespace SchedulingApplication.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult DeleteMultiplePlayer(List<int> values)
+        {
+            try
+            {
+                var result = _playerServices.DeletePlayers(values);
+                return Json(new
+                {
+                    Success = result
+                });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

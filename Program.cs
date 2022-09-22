@@ -6,8 +6,6 @@ using AutoMapper;
 using SchedulingApplication.Helpers;
 using SchedulingApplication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using SchedulingApplication.Models;
-using SchedulingApplication.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -74,6 +72,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Player}/{action=Index}/{id?}");
+    pattern: "{controller=LogIn}/{action=Index}/{id?}");
 
 app.Run();

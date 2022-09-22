@@ -1,15 +1,20 @@
-﻿using SchedulingApplication.Data;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using SchedulingApplication.Data;
 using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Infrastructure.Interface;
+using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Infrastructure.Services
 {
     public class CoachServices : ICoachServices
     {
         private readonly SchedulingApplicationContext _dbContext;
-        public CoachServices(SchedulingApplicationContext dbContext)
+        private readonly IMapper _mapper;
+        public CoachServices(SchedulingApplicationContext dbContext,IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public async Task<bool> AddCoach(Coach entity)
@@ -71,11 +76,26 @@ namespace SchedulingApplication.Infrastructure.Services
             }
         }
 
-        public List<Coach> GetAllCoachdetails()
+        public JqueryDataTablesResult<CoachModel> GetAllCoachdetails(JqueryDataTablesParameters request)
         {
             try
             {
-                return _dbContext.Coaches.ToList();
+                var query = _dbContext.Coaches.AsQueryable();
+                if (!string.IsNullOrEmpty(request.SearchValue))
+                {
+                    query = query.Where(x => x.Name.Contains(request.SearchValue) || (x.EmailAddress != null && x.EmailAddress.Contains(request.SearchValue)));
+                }
+
+                var result = _mapper.Map<List<CoachModel>>(query.ToList());
+                var total = result.Count();
+                var items = result.Skip(request.Start).Take(request.Length).ToList();
+                return new JqueryDataTablesResult<CoachModel>
+                {
+                    RecordsTotal = total,
+                    Data = items,
+                    Draw = request.Draw == 0 ? 1 : request.Draw
+                };
+
             }
             catch (Exception ex)
             {

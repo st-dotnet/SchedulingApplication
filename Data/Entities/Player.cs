@@ -13,7 +13,6 @@
         public int? UpdatedBy { get; set; }
         public string? Image { get; set; }
         public bool? IsClubPassPlayer { get; set; }
-
         public virtual Team? Team { get; set; }
 
     }
