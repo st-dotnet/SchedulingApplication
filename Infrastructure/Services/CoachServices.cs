@@ -76,6 +76,28 @@ namespace SchedulingApplication.Infrastructure.Services
             }
         }
 
+        public async Task<bool> DeleteCoaches(List<int> coachesIds)
+        {
+            try
+            {
+                foreach (int coachId in coachesIds)
+                {
+                    var objCoach = _dbContext.Coaches.FirstOrDefault(e => e.Id == coachId);
+
+                    if (objCoach == null)
+                        throw new Exception("This Coach doesn't exist.");
+
+                    _dbContext.Coaches.Remove(objCoach);
+                }
+                return await _dbContext.SaveChangesAsync() > 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public JqueryDataTablesResult<CoachModel> GetAllCoachdetails(JqueryDataTablesParameters request)
         {
             try

@@ -145,7 +145,7 @@ var KTCustomersList = function () {
                                 }
                             },
                         });
-                    } 
+                    }
                 });
             })
         });
@@ -177,13 +177,19 @@ var KTCustomersList = function () {
         const checkboxes = table.querySelectorAll('[type="checkbox"]');
 
         // Select elements
-        const deleteSelected = document.querySelector('[data-kt-customer-table-select="delete_selected"]');
+        const deleteSelected = document.querySelector('[data-kt-coach-table-select="delete_selected"]');
 
         // Toggle delete selected toolbar
         checkboxes.forEach(c => {
             // Checkbox on click event
             c.addEventListener('click', function () {
                 debugger;
+
+                $("#checkAllCoaches").click(function () {
+                    $(".checkBox").prop('checked',
+                        $(this).prop('checked'));
+                });
+
                 setTimeout(function () {
                     toggleToolbars();
                 }, 50);
@@ -191,55 +197,82 @@ var KTCustomersList = function () {
         });
 
         // Deleted selected rows
-    //    deleteSelected.addEventListener('click', function () {
-    //        debugger;
-    //        // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
-    //        Swal.fire({
-    //            text: "Are you sure you want to delete selected customers?",
-    //            icon: "warning",
-    //            showCancelButton: true,
-    //            buttonsStyling: false,
-    //            confirmButtonText: "Yes, delete!",
-    //            cancelButtonText: "No, cancel",
-    //            customClass: {
-    //                confirmButton: "btn fw-bold btn-danger",
-    //                cancelButton: "btn fw-bold btn-active-light-primary"
-    //            }
-    //        }).then(function (result) {
-    //            if (result.value) {
-    //                Swal.fire({
-    //                    text: "You have deleted all selected customers!.",
-    //                    icon: "success",
-    //                    buttonsStyling: false,
-    //                    confirmButtonText: "Ok, got it!",
-    //                    customClass: {
-    //                        confirmButton: "btn fw-bold btn-primary",
-    //                    }
-    //                }).then(function () {
-    //                    // Remove all selected customers
-    //                    checkboxes.forEach(c => {
-    //                        if (c.checked) {
-    //                            datatable.row($(c.closest('tbody tr'))).remove().draw();
-    //                        }
-    //                    });
+        deleteSelected.addEventListener('click', function () {
+            debugger;
+            // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
+            Swal.fire({
+                text: "Are you sure you want to delete selected customers?",
+                icon: "warning",
+                showCancelButton: true,
+                buttonsStyling: false,
+                confirmButtonText: "Yes, delete!",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then(function (result) {
+                if (result.value) {
 
-    //                    // Remove header checked box
-    //                    const headerCheckbox = table.querySelectorAll('[type="checkbox"]')[0];
-    //                    headerCheckbox.checked = false;
-    //                });
-    //            } else if (result.dismiss === 'cancel') {
-    //                Swal.fire({
-    //                    text: "Selected customers was not deleted.",
-    //                    icon: "error",
-    //                    buttonsStyling: false,
-    //                    confirmButtonText: "Ok, got it!",
-    //                    customClass: {
-    //                        confirmButton: "btn fw-bold btn-primary",
-    //                    }
-    //                });
-    //            }
-    //        });
-    //    });
+                    var selectedIDs = new Array();
+                    $('input:checkbox.checkBox').each(function () {
+                        if ($(this).prop('checked')) {
+                            selectedIDs.push($(this).attr('data-id'));
+                        }
+                    });
+                    debugger;
+                    var postCoachData = { values: selectedIDs }
+                    console.log(postCoachData);
+                    $.ajax({
+                        "url": "/Coach/DeleteMultipleCoach/",
+                        "type": "POST",
+                        "data": postCoachData,
+                        "dataType": "json",
+                        success: function (data) {
+                            if (data.success) {
+                                debugger;
+
+                            } else {
+                            
+}
+                        },
+                        "traditional": true,
+                    }),
+
+
+                    Swal.fire({
+                        text: "You have deleted all selected customers!.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    }).then(function () {
+                        // Remove all selected customers
+                        checkboxes.forEach(c => {
+                            if (c.checked) {
+                                datatable.row($(c.closest('tbody tr'))).remove().draw();
+                            }
+                        });
+
+                        // Remove header checked box
+                        const headerCheckbox = table.querySelectorAll('[type="checkbox"]')[0];
+                        headerCheckbox.checked = false;
+                    });
+                } else if (result.dismiss === 'cancel') {
+                    Swal.fire({
+                        text: "Selected customers was not deleted.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary",
+                        }
+                    });
+                }
+            });
+        });
     }
 
     // Toggle toolbars
@@ -248,7 +281,7 @@ var KTCustomersList = function () {
         // Define variables
         const toolbarBase = document.querySelector('[data-kt-customer-table-toolbar="base"]');
         const toolbarSelected = document.querySelector('[data-kt-customer-table-toolbar="selected"]');
-        const selectedCount = document.querySelector('[data-kt-customer-table-select="selected_count"]');
+        const selectedCount = document.querySelector('[data-kt-coach-table-select="selected_count"]');
 
         // Select refreshed checkbox DOM elements 
         const allCheckboxes = table.querySelectorAll('tbody [type="checkbox"]');
@@ -353,9 +386,9 @@ var KTCustomersList = function () {
                     })
                     ,
                     (() => {
-                       /* const t = document.querySelector('[data-kt-customer-table-filter="delete_row"]'),*/
-                            //n = t.querySelector('[data-kt-customer-table-filter="delete_selected"]'),
-                            //r = t.querySelectorAll("selected");
+                         /*const t = document.querySelector('[data-kt-customer-table-filter="delete_row"]'),*/
+                        //n = t.querySelector('[data-kt-customer-table-filter="delete_selected"]'),
+                        //r = t.querySelectorAll("selected");
                         //n.addEventListener("click", function () {
                         //    var t = "";
                         //    r.forEach((e, n) => {

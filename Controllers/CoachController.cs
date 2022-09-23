@@ -93,5 +93,23 @@ namespace SchedulingApplication.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<ActionResult> DeleteMultipleCoach(List<int> values)
+        {
+            try
+            {
+                var result = _coachServices.DeleteCoaches(values);
+                return Json(new
+                {
+                    Success = result
+                });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

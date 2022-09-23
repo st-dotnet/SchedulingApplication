@@ -11,7 +11,6 @@ namespace SchedulingApplication.Data.Entities
         public string? AgeGroup { get; set; }
         public int CoachId { get; set; }
         public int CreatedBy { get; set; }
-
         public byte[]? Image { get; set; }
         public DateTime CreatedOn { get; set; }
         public virtual Coach? Coach { get; set; } 

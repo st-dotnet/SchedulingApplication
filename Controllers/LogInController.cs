@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Infrastructure.Interface;
@@ -36,6 +37,13 @@ namespace SchedulingApplication.Controllers
             {
                 throw;
             } 
+        }
+
+
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index", "LogIn");
         }
     }
 }
