@@ -1,15 +1,19 @@
-﻿using SchedulingApplication.Data;
+﻿using AutoMapper;
+using SchedulingApplication.Data;
 using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Infrastructure.Interface;
+using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Infrastructure.Services
 {
     public class CoachServices : ICoachServices
     {
         private readonly SchedulingApplicationContext _dbContext;
-        public CoachServices(SchedulingApplicationContext dbContext)
+        private readonly IMapper _mapper;
+        public CoachServices(SchedulingApplicationContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;   
         }
 
         public async Task<bool> AddCoach(Coach entity)
