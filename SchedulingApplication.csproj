@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\assets\js\custom\apps\Teams\**" />
+    <Content Remove="wwwroot\assets\js\custom\apps\Teams\**" />
+    <EmbeddedResource Remove="wwwroot\assets\js\custom\apps\Teams\**" />
+    <None Remove="wwwroot\assets\js\custom\apps\Teams\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\Coach\xhfz0vdo.n3o~" />
     <None Remove="Views\LogIn\Index.cshtml~RF32fafb16.TMP" />
   </ItemGroup>

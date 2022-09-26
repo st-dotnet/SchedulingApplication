@@ -125,6 +125,18 @@ namespace SchedulingApplication.Infrastructure.Services
             }
         }
 
+        public List<Coach> GetAllCoachdetails()
+        {
+            try
+            {
+                return _dbContext.Coaches.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error occured: {ex}");
+            }
+        }
+
         public Coach? GetAllCoachdetailsById(int coachId)
         {
             return _dbContext.Coaches.FirstOrDefault(x => x.Id == coachId);
