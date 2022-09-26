@@ -122,30 +122,27 @@ var KTUsersList = function () {
                             success: function (data) {
                                 if (data.success) {
                                     debugger;
-
+                                    Swal.fire({ text: "You have deleted all selected customers!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
+                                        .then(function () {
+                                            c.forEach((t) => {
+                                                t.checked &&
+                                                    datatable
+                                                        .row($(t.closest("tbody tr")))
+                                                        .remove()
+                                                        .draw();
+                                            });
+                                            table.querySelectorAll('[type="checkbox"]')[0].checked = !1;
+                                        })
+                                        .then(function () {
+                                            a(), l();
+                                        });
+                                }
+                                else {
+                                    Swal.fire({ text: "Selected customers was not deleted.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } });
                                 }
                             },
                             "traditional": true,
-                        }),
-
-                        t.value
-                            ? 
-                            Swal.fire({ text: "You have deleted all selected customers!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
-                                .then(function () {
-                                    c.forEach((t) => {
-                                        t.checked &&
-                                            datatable
-                                                .row($(t.closest("tbody tr")))
-                                                .remove()
-                                                .draw();
-                                    });
-                                    table.querySelectorAll('[type="checkbox"]')[0].checked = !1;
-                                })
-                                .then(function () {
-                                    a(), l();
-                                })
-                            : "cancel" === t.dismiss &&
-                            Swal.fire({ text: "Selected customers was not deleted.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } });
+                        });
                     });
                 });
         };

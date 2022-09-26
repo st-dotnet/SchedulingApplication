@@ -14,6 +14,9 @@ namespace SchedulingApplication.Helpers
                 .ForMember(dest => dest.Team, src => src.MapFrom(x => x.Team != null ? x.Team.Name : "No Team assigned"));
             CreateMap<Coach, CoachModel>().ReverseMap();
             CreateMap<PlayerModel, Player>();
+            CreateMap<Team, TeamModel>()
+               .ForMember(dest => dest.Coach, scr => scr.MapFrom(x => x.Coach != null ? x.Coach.Name : "No Coach Assigned"));
+            CreateMap<TeamModel, Team>();
         }
     }
 }
