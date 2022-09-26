@@ -10,7 +10,7 @@ namespace SchedulingApplication.Infrastructure.Interface
         Coach GetAllCoachdetailsById(int id);
         Task<bool> DeleteCoachById(int playerId);
 
-
+        Task<bool> DeleteCoaches(List<int> coachesIds);
 
     }
 }

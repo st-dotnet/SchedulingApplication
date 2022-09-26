@@ -14,6 +14,7 @@ namespace SchedulingApplication.Data.Entities
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public int CreatedBy { get; set; }
+        public bool? IsOverlap { get; set; }
 
         [Column(TypeName = "DateTime")]
         public DateTime CreatedOn { get; set; }

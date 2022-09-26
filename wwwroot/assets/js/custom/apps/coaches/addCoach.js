@@ -83,16 +83,16 @@ var KTModalCoachesAdd = function () {
                 e.preventDefault(), n && n.validate().then((function (e) {
                     debugger;
                     console.log("Submit Button Clicked");
-                    var postCoachData = {
+                    var postCoach = {
                         name: $('#Name').val(),
                         emailaddress: $('#EmailAddress').val(),
                     };
 
-                    console.log(postCoachData);
+                    console.log(postCoach);
                     $.ajax({
                         type: "POST",
                         url: "/Coach/AddCoach",
-                        data: postCoachData,
+                        data: postCoach,
                         dataType: "json",
                         success: function (response) {
                             debugger;

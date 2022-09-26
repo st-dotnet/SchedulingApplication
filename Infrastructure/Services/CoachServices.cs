@@ -71,11 +71,49 @@ namespace SchedulingApplication.Infrastructure.Services
             }
         }
 
-        public List<Coach> GetAllCoachdetails()
+
+        public async Task<bool> DeleteCoaches(List<int> coachesIds)
         {
             try
             {
-                return _dbContext.Coaches.ToList();
+                foreach (int coachId in coachesIds)
+                {
+                    var objCoach = _dbContext.Coaches.FirstOrDefault(e => e.Id == coachId);
+
+                    if (objCoach == null)
+                        throw new Exception("This Coach doesn't exist.");
+
+                    _dbContext.Coaches.Remove(objCoach);
+                }
+                return await _dbContext.SaveChangesAsync() > 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public JqueryDataTablesResult<CoachModel> GetAllCoachdetails(JqueryDataTablesParameters request)
+        {
+            try
+            {
+                var query = _dbContext.Coaches.AsQueryable();
+                if (!string.IsNullOrEmpty(request.SearchValue))
+                {
+                    query = query.Where(x => x.Name.Contains(request.SearchValue) || (x.EmailAddress != null && x.EmailAddress.Contains(request.SearchValue)));
+                }
+
+                var result = _mapper.Map<List<CoachModel>>(query.ToList());
+                var total = result.Count();
+                var items = result.Skip(request.Start).Take(request.Length).ToList();
+                return new JqueryDataTablesResult<CoachModel>
+                {
+                    RecordsTotal = total,
+                    Data = items,
+                    Draw = request.Draw == 0 ? 1 : request.Draw
+                };
+
             }
             catch (Exception ex)
             {

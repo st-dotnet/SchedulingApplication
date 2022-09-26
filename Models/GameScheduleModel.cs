@@ -8,6 +8,7 @@
         public int PlayingAgainstId { get; set; }
         public int FieldLocationId { get; set; }
         public int GameTypeId { get; set; }
+        public bool IsOverlap { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
     }

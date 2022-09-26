@@ -11,6 +11,7 @@
         public DateTime? End { get; set; }  
         public string? Location { get; set; } 
         public string? ClassName { get; set; }
+        public  bool? IsOverlap { get; set; }
         public string StartStr 
         { 
             get
