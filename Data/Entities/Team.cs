@@ -12,7 +12,7 @@ namespace SchedulingApplication.Data.Entities
         public int CoachId { get; set; }
         public int CreatedBy { get; set; }
 
-        public byte[]? Image { get; set; }
+        public string? Image { get; set; }
         public DateTime CreatedOn { get; set; }
         public virtual Coach? Coach { get; set; } 
         public virtual ICollection<GameSchedule>? HomeSchedules { get; set; }
