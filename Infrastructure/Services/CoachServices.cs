@@ -1,28 +1,23 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using SchedulingApplication.Data;
+﻿using SchedulingApplication.Data;
 using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Infrastructure.Interface;
-using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Infrastructure.Services
 {
     public class CoachServices : ICoachServices
     {
         private readonly SchedulingApplicationContext _dbContext;
-        private readonly IMapper _mapper;
-        public CoachServices(SchedulingApplicationContext dbContext,IMapper mapper)
+        public CoachServices(SchedulingApplicationContext dbContext)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
         }
 
         public async Task<bool> AddCoach(Coach entity)
         {
             try
-            {  
-                var coach = _dbContext.Coaches.FirstOrDefault(c => c.Id == entity.Id); 
-                if(coach != null)
+            {
+                var coach = _dbContext.Coaches.FirstOrDefault(c => c.Id == entity.Id);
+                if (coach != null)
                 {
                     var coachFromDb = await _dbContext.Coaches.FindAsync(entity.Id);
                     coachFromDb.Name = entity.Name;
@@ -46,7 +41,7 @@ namespace SchedulingApplication.Infrastructure.Services
                     else
                         return false;
                 }
-                
+
                 #endregion
 
                 return true;
@@ -75,6 +70,7 @@ namespace SchedulingApplication.Infrastructure.Services
                 throw new Exception($"Error occured: {ex}");
             }
         }
+
 
         public async Task<bool> DeleteCoaches(List<int> coachesIds)
         {
@@ -127,7 +123,7 @@ namespace SchedulingApplication.Infrastructure.Services
 
         public Coach? GetAllCoachdetailsById(int coachId)
         {
-            return _dbContext.Coaches.FirstOrDefault(x=> x.Id == coachId);
+            return _dbContext.Coaches.FirstOrDefault(x => x.Id == coachId);
         }
     }
 }

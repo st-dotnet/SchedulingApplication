@@ -6,6 +6,8 @@ using AutoMapper;
 using SchedulingApplication.Helpers;
 using SchedulingApplication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using SchedulingApplication.Models;
+using SchedulingApplication.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +44,7 @@ builder.Services.AddScoped<IGameScheduleServices, GameScheduleServices>();
 builder.Services.AddScoped<IPlayerServices, PlayerServices>();
 builder.Services.AddScoped<ICoachServices, CoachServices>();
 builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
+builder.Services.AddScoped<ITeamService, TeamService>();
 builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
