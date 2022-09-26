@@ -8,12 +8,12 @@ namespace SchedulingApplication.Infrastructure.Services
     public class GameScheduleServices : IGameScheduleServices
     {
         private readonly SchedulingApplicationContext _dbContext;
+        bool? checkEdit;
 
         public GameScheduleServices(SchedulingApplicationContext dbContext)
         {
             _dbContext = dbContext;
         }
-
 
         public List<GameSchedule> GetGameSchedules()
         {
@@ -43,17 +43,21 @@ namespace SchedulingApplication.Infrastructure.Services
         {
             try
             {
-                var gameSchedule = _dbContext.GameSchedules.FirstOrDefault(u => u.Id == entity.Id);
 
+                var gameSchedule = _dbContext.GameSchedules.FirstOrDefault(u => u.Id == entity.Id);
                 if (gameSchedule == null)
                 {
+                    checkEdit = true;
                     gameSchedule = entity;
+                    FindConflict(entity);
                     gameSchedule.CreatedOn = DateTime.UtcNow;
                     _dbContext.GameSchedules.Add(gameSchedule);
                     await _dbContext.SaveChangesAsync();
                 }
                 else
                 {
+                    checkEdit = false;
+                    FindConflict(entity);
                     gameSchedule.Name = entity.Name;
                     gameSchedule.GameTypeId = entity.GameTypeId;
                     gameSchedule.TeamId = entity.TeamId;
@@ -71,7 +75,7 @@ namespace SchedulingApplication.Infrastructure.Services
             {
                 // TODO: Logger.Log(ex);
                 return false;
-            } 
+            }
         }
 
         public async Task<bool> DeleteGameScheduleById(int id)
@@ -93,17 +97,31 @@ namespace SchedulingApplication.Infrastructure.Services
         }
 
 
-        //public Task<bool> GetScheduleGames(GameSchedule entity)
-        //{
-        //    try
-        //    {
-        //        return true;
-        //    }
-        //    catch (Exception)
-        //    {
+        private void FindConflict(GameSchedule entity)
+        {
+            var eventTimes = _dbContext.GameSchedules.ToList();
 
-        //        throw;
-        //    }
-        //}
+            foreach (var eventTime in eventTimes)
+            {
+                if (checkEdit == true)
+                {
+                    bool overlap = entity.StartDate <= eventTime.EndDate && eventTime.StartDate <= entity.EndDate;
+                    if (overlap)
+                        entity.IsOverlap = true;
+                }
+                else
+                {
+                    bool overlap = entity.StartDate <= eventTime.EndDate && eventTime.StartDate <= entity.EndDate;
+                    if (overlap)
+                        eventTime.IsOverlap = true;
+                    else
+                    {
+                        eventTime.IsOverlap = false;
+                    }
+
+                }
+
+            }
+        }
     }
 }

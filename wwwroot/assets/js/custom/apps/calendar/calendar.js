@@ -524,7 +524,8 @@ var KTAppCalendar = function () {
                                 startdate: startDateTime,
                                 enddate: endDateTime,
                             };
-
+                            console.log(postEditData);
+                            debugger;
                             $.ajax({
                                 type: "POST",
                                 url: form.action,

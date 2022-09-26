@@ -69,6 +69,7 @@ namespace SchedulingApplication.Controllers
             try
             {
                 var result = new List<CalenderDetailModel>();
+
                 result = _gameScheduleServices?.GetGameSchedules()?.Select(x => new CalenderDetailModel
                 {
                     Id = x.Id,
@@ -79,7 +80,7 @@ namespace SchedulingApplication.Controllers
                     Start = x.StartDate,
                     End = x.EndDate,
                     Location = x.FieldLocation?.Name,
-                    ClassName = "fc-event-danger fc-event-solid-warning"
+                    ClassName =x.IsOverlap == true? "fc-event-danger fc-event-solid-warning bg-warning" : "fc-event-solid-warning"
                 }).ToList();
 
                 return Json(result);
