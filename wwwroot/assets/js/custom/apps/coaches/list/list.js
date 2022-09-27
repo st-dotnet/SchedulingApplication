@@ -214,46 +214,42 @@ var KTCustomersList = function () {
                         success: function (data) {
                             if (data.success) {
                                 debugger;
+                                Swal.fire({
+                                    text: "You have deleted all selected customers!.",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                }).then(function () {
+                                    // Remove all selected customers
+                                    checkboxes.forEach(c => {
+                                        if (c.checked) {
+                                            datatable.row($(c.closest('tbody tr'))).remove().draw();
+                                        }
+                                    });
+
+                                    // Remove header checked box
+                                    const headerCheckbox = table.querySelectorAll('[type="checkbox"]')[0];
+                                    headerCheckbox.checked = false;
+                                });
 
                             } else {
-                            
-}
+                                Swal.fire({
+                                    text: "Selected customers was not deleted.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary",
+                                    }
+                                });
+                            }
                         },
                         "traditional": true,
-                    }),
-
-
-                    Swal.fire({
-                        text: "You have deleted all selected customers!.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-primary",
-                        }
-                    }).then(function () {
-                        // Remove all selected customers
-                        checkboxes.forEach(c => {
-                            if (c.checked) {
-                                datatable.row($(c.closest('tbody tr'))).remove().draw();
-                            }
-                        });
-
-                        // Remove header checked box
-                        const headerCheckbox = table.querySelectorAll('[type="checkbox"]')[0];
-                        headerCheckbox.checked = false;
                     });
-                } else if (result.dismiss === 'cancel') {
-                    Swal.fire({
-                        text: "Selected customers was not deleted.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-primary",
-                        }
-                    });
-                }
+                }  
             });
         });
     }

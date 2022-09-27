@@ -88,7 +88,7 @@ var KTUsersAddUser = function () {
                             contentType: false,
                             processData: false,
                             success: function (data) {
-                                if (data) {
+                                if (data.success) {
                                     // Show popup confirmation 
                                     Swal.fire({
                                         text: "Form has been successfully submitted!",
