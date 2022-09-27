@@ -5,7 +5,6 @@ var ModalUpdateCoaches = function () {
         init: function () {
             t = document.querySelector("#kt_modal_update_customer"), r = new bootstrap.Modal(t), c = t.querySelector("#kt_modal_update_customer_form"), e = c.querySelector("#kt_modal_update_customer_submit"), n = c.querySelector("#kt_modal_update_customer_cancel"), o = t.querySelector("#kt_modal_update_customer_close"), e.addEventListener("click", (function (t) {
                 t.preventDefault(), e.setAttribute("data-kt-indicator", "on"), setTimeout((function () {
-                    debugger;
                     var postCoachData = {
                         id: $('#Id').val(),
                         name: $('#Name').val(),

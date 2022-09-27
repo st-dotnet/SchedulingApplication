@@ -22,7 +22,6 @@ var KTUsersList = function () {
                         cancelButtonText: "No, cancel",
                         customClass: { confirmButton: "btn fw-bold btn-danger", cancelButton: "btn fw-bold btn-active-light-primary" },
                     }).then(function (t) {
-                        debugger;
                         $.ajax({
                             url: '/Player/DeletePlayer' + "?id=" + id,
                             type: 'Delete',
@@ -49,12 +48,10 @@ var KTUsersList = function () {
         },
         d = () => {
             table.querySelectorAll('[data-kt-users-modal-action="edit"]').forEach((t) => {
-                debugger;
                 t.addEventListener("click", function (e) {
                     console.log('started');
                     e.preventDefault();
                     bootstrapModal.show();
-                    debugger;
                     $.ajax({
                         url: '/Player/Edit/'+row.id,
                         type: 'GET',
@@ -81,7 +78,6 @@ var KTUsersList = function () {
             const s = document.querySelector('[data-kt-user-table-select="delete_selected"]');
             c.forEach((e) => {
                 e.addEventListener("click", function () {
-                    debugger;
 
                     $("#checkAll").click(function () {
                         $(".checkBox").prop('checked',
@@ -103,7 +99,6 @@ var KTUsersList = function () {
                         cancelButtonText: "No, cancel",
                         customClass: { confirmButton: "btn fw-bold btn-danger", cancelButton: "btn fw-bold btn-active-light-primary" },
                     }).then(function (t) {
-                        debugger;
 
                         var selectedIDs = new Array();
                         $('input:checkbox.checkBox').each(function () {
@@ -111,7 +106,6 @@ var KTUsersList = function () {
                                 selectedIDs.push($(this).attr('data-id'));
                             }
                         });
-                        debugger;
                         var postData = { values: selectedIDs }
                         console.log(postData);
                         $.ajax({
@@ -121,7 +115,6 @@ var KTUsersList = function () {
                             "dataType": "json",
                             success: function (data) {
                                 if (data.success) {
-                                    debugger;
                                     Swal.fire({ text: "You have deleted all selected customers!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
                                         .then(function () {
                                             c.forEach((t) => {
@@ -234,7 +227,6 @@ var KTUsersList = function () {
                     }),
                     l(),
                     document.querySelector('[data-kt-user-table-filter="search"]').addEventListener("keyup", function (t) {
-                       debugger;
                         datatable.search(t.target.value).draw();
                     }),
                     document.querySelector('[data-kt-user-table-filter="reset"]').addEventListener("click", function () {

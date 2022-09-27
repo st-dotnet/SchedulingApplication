@@ -58,7 +58,6 @@ var KTAppCalendar = function () {
 
     // Private functions
     var initCalendarApp = function () {
-        debugger;
         // Define variables
         var calendarEl = document.getElementById('kt_calendar_app');
         var todayDate = moment().startOf('day');
@@ -68,7 +67,6 @@ var KTAppCalendar = function () {
         var TOMORROW = todayDate.clone().add(1, 'day').format('YYYY-MM-DD');
 
         // Init calendar --- more info: https://fullcalendar.io/docs/initialize-globals
-        debugger;
         calendar = new FullCalendar.Calendar(calendarEl, {
             headerToolbar: {
                 left: 'prev,next today',
@@ -305,7 +303,6 @@ var KTAppCalendar = function () {
         submitButton.addEventListener('click', function (e) {
             // Prevent default button action
             e.preventDefault();
-            debugger;
             // Validate form before submit
             if (validator) {
                 validator.validate().then(function (status) {
@@ -316,7 +313,6 @@ var KTAppCalendar = function () {
                         submitButton.setAttribute('data-kt-indicator', 'on');
                         // Disable submit button whilst loading
                         submitButton.disabled = true;
-                        debugger;
                         const allDayToggle = form.querySelector('#kt_calendar_datepicker_allday');
 
                         let allDayEvent = false;
@@ -353,7 +349,6 @@ var KTAppCalendar = function () {
                             data: postData,
                             dataType: "json",
                             success: function (response) {
-                                debugger;
                                 if (response.success) {
                                     // Show popup confirmation 
                                     Swal.fire({
@@ -440,7 +435,6 @@ var KTAppCalendar = function () {
 
     // Handle edit event
     const handleEditEvent = () => {
-        debugger;
         console.log("handleEditEvent");
         // Update modal title
         modalTitle.innerText = "Edit an Event";
@@ -468,10 +462,8 @@ var KTAppCalendar = function () {
         populateForm(data);
         console.log(data);
 
-        debugger;
         // Handle submit form
         submitButton.addEventListener('click', function (e) {
-            debugger;
             // Prevent default button action
             e.preventDefault();
 
@@ -525,14 +517,12 @@ var KTAppCalendar = function () {
                                 enddate: endDateTime,
                             };
                             console.log(postEditData);
-                            debugger;
                             $.ajax({
                                 type: "POST",
                                 url: form.action,
                                 data: postEditData,
                                 dataType: "json",
                                 success: function (response) {
-                                    debugger;
                                     if (response.success) {
                                         // Show popup confirmation 
                                         Swal.fire({
@@ -668,7 +658,6 @@ var KTAppCalendar = function () {
 
     // Handle view event
     const handleViewEvent = () => {
-        debugger;
         viewModal.show();
 
         // Detect all day event
@@ -703,7 +692,6 @@ var KTAppCalendar = function () {
         viewDeleteButton.addEventListener('click', e => {
             e.preventDefault();
 
-            debugger;
             Swal.fire({
                 text: "Are you sure you would like to delete this event?",
                 icon: "warning",
@@ -856,7 +844,7 @@ var KTAppCalendar = function () {
 
     // Populate form 
     const populateForm = () => {
-        debugger;
+
         console.log("populateForm");
         eventName.value = data.eventName ? data.eventName : '';
         $("#Name option:contains(" + data.eventName + ")").attr('selected', 'selected');
@@ -912,7 +900,6 @@ var KTAppCalendar = function () {
         init: function () {
             // Define variables
             // Add event modal
-            debugger;
             const element = document.getElementById('kt_modal_add_event');
             form = element.querySelector('#kt_modal_add_event_form');
             eventName = form.querySelector('[name="Name"]');
@@ -932,7 +919,6 @@ var KTAppCalendar = function () {
             modal = new bootstrap.Modal(element);
 
             // View event modal
-            debugger;
             const viewElement = document.getElementById('kt_modal_view_event');
             viewModal = new bootstrap.Modal(viewElement);
             viewEventName = viewElement.querySelector('[data-kt-calendar="event_name"]');

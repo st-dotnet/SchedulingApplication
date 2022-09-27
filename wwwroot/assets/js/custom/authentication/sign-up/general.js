@@ -92,7 +92,6 @@ var KTSignupGeneral = function () {
 
         // Handle form submit
         submitButton.addEventListener('click', function (e) {
-            debugger;
             e.preventDefault();
 
             validator.revalidateField('password');

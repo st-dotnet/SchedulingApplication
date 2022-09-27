@@ -81,13 +81,11 @@ var KTModalCoachesAdd = function () {
                 n.revalidateField("country")
             })), t.addEventListener("click", (function (e) {
                 e.preventDefault(), n && n.validate().then((function (e) {
-                    debugger;
                     console.log("Submit Button Clicked");
                     var postCoach = {
                         name: $('#Name').val(),
                         emailaddress: $('#EmailAddress').val(),
                     };
-
                     console.log(postCoach);
                     $.ajax({
                         type: "POST",
@@ -95,7 +93,6 @@ var KTModalCoachesAdd = function () {
                         data: postCoach,
                         dataType: "json",
                         success: function (response) {
-                            debugger;
                             console.log("validated!"), response.success ? (t.setAttribute("data-kt-indicator", "on"), t.disabled = !0, setTimeout((function () {
                                 t.removeAttribute("data-kt-indicator"), Swal.fire({
                                     text: "Form has been successfully submitted!",
