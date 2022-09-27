@@ -36,7 +36,6 @@ var KTSigninGeneral = function () {
                         email: $('#Email').val(),
                         password: $('#Password').val(),
                     };
-                    debugger;
                     console.log(signInformData);
                     $.ajax({
                         url: '/LogIn/LogInUser/',
@@ -44,7 +43,6 @@ var KTSigninGeneral = function () {
                         data: signInformData,
                         success: function (response) {
                             if (response.result == true) {
-                                debugger;
                                 (e.setAttribute("data-kt-indicator", "on"), e.disabled = !0, setTimeout((function () {
                                     e.removeAttribute("data-kt-indicator"), e.disabled = !1, Swal.fire({
                                         text: "You have successfully logged in!",

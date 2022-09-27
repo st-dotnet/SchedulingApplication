@@ -70,7 +70,6 @@ var KTUsersUpdateDetails = function () {
                     formData.append('coachId', $('#coachId').val());
                     formData.append('isLookingClubPassPlayer', isclub);
                     console.log(formData);
-                    debugger;
                     $.ajax({
                         type: "POST",
                         url: '/Team/AddTeams',

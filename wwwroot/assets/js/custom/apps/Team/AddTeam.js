@@ -52,15 +52,12 @@ var KTUsersAddUser = function () {
         // Submit button handler
         const submitButton = element.querySelector('[data-kt-users-modal-action="submit"]');
         submitButton.addEventListener('click', e => {
-            debugger;
             e.preventDefault();
 
             // Validate form before submit
             if (validator) {
-                debugger;
 
                 validator.validate().then(function (status) {
-                    debugger;
 
                     console.log('validated!');
 
@@ -78,7 +75,6 @@ var KTUsersAddUser = function () {
                         else {
                             isclub = false;
                         }
-                        debugger;
 
                         var formData = new FormData($('#kt_modal_add_user_form')[0]);// form Id - formUploadInvoice
                         formData.append('baseImage', $('input[type=file]')[0].files[0]);
@@ -94,7 +90,6 @@ var KTUsersAddUser = function () {
                             contentType: false,
                             processData: false,
                             success: function (data) {
-                                debugger;
                                 if (data.success) {
                                     // Show popup confirmation 
                                     Swal.fire({

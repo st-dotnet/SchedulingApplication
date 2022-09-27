@@ -55,7 +55,6 @@ var KTUsersUpdateDetails = function () {
                 }));
                 const o = t.querySelector('[data-kt-users-modal-action="submit"]');
                 o.addEventListener("click", (function (t) {
-                    debugger;
                     if ($('#IsClubPassPlayer').prop('checked')) {
                         var isclub = true;
                     }

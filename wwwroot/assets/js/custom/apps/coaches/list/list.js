@@ -71,7 +71,6 @@ var KTCustomersList = function () {
         deleteButtons.forEach(d => {
             // Delete button on click
             d.addEventListener('click', function (e) {
-                debugger;
                 e.preventDefault();
 
                 // Select parent row
@@ -94,7 +93,6 @@ var KTCustomersList = function () {
                     }
                 }).then(function (result) {
                     if (result.value) {
-                        debugger;
                         $.ajax({
                             url: '/Coach/DeleteCoach' + "?id=" + id,
                             type: 'Delete',
@@ -156,7 +154,6 @@ var KTCustomersList = function () {
     var initToggleToolbar = () => {
         // Toggle selected action toolbar
         // Select all checkboxes
-        debugger;
         const checkboxes = table.querySelectorAll('[type="checkbox"]');
 
         // Select elements
@@ -166,7 +163,6 @@ var KTCustomersList = function () {
         checkboxes.forEach(c => {
             // Checkbox on click event
             c.addEventListener('click', function () {
-                debugger;
 
                 $("#checkAllCoaches").click(function () {
                     $(".checkBox").prop('checked',
@@ -181,7 +177,6 @@ var KTCustomersList = function () {
 
         // Deleted selected rows
         deleteSelected.addEventListener('click', function () {
-            debugger;
             // SweetAlert2 pop up --- official docs reference: https://sweetalert2.github.io/
             Swal.fire({
                 text: "Are you sure you want to delete selected customers?",
@@ -203,7 +198,6 @@ var KTCustomersList = function () {
                             selectedIDs.push($(this).attr('data-id'));
                         }
                     });
-                    debugger;
                     var postCoachData = { values: selectedIDs }
                     console.log(postCoachData);
                     $.ajax({
@@ -213,7 +207,6 @@ var KTCustomersList = function () {
                         "dataType": "json",
                         success: function (data) {
                             if (data.success) {
-                                debugger;
                                 Swal.fire({
                                     text: "You have deleted all selected customers!.",
                                     icon: "success",
@@ -256,7 +249,6 @@ var KTCustomersList = function () {
 
     // Toggle toolbars
     const toggleToolbars = () => {
-        debugger;
         // Define variables
         const toolbarBase = document.querySelector('[data-kt-customer-table-toolbar="base"]');
         const toolbarSelected = document.querySelector('[data-kt-customer-table-toolbar="selected"]');
@@ -291,7 +283,6 @@ var KTCustomersList = function () {
     // Public methods
     return {
         init: function () {
-            debugger;
             table = document.querySelector('#kt_customers_table');
             table &&
                 (

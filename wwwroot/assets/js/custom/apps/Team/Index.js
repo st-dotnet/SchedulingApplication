@@ -30,9 +30,6 @@ var KTUsersList = function () {
                             url: "/Team/DeleteTeam?id=" + id,
                             type: "Delete",
                             success: function (data) {
-                                if (data.success) {
-                                    debugger;
-                                }
                             },
                         });
                         t.value
@@ -80,7 +77,6 @@ var KTUsersList = function () {
             const s = document.querySelector('[data-kt-user-table-select="delete_selected"]');
             c.forEach((e) => {
                 e.addEventListener("click", function () {
-                    debugger;
                     $("#selectAllTeams").click(function () {
                         $(".checkBox").prop('checked',
                             $(this).prop('checked'));
@@ -101,7 +97,6 @@ var KTUsersList = function () {
                         cancelButtonText: "No, cancel",
                         customClass: { confirmButton: "btn fw-bold btn-danger", cancelButton: "btn fw-bold btn-active-light-primary" },
                     }).then(function (t) {
-                        debugger;
 
                         var selectedTeams = new Array();
                         $('input:checkbox.checkBox').each(function () {
@@ -109,7 +104,6 @@ var KTUsersList = function () {
                                 selectedTeams.push($(this).attr('data-id'));
                             }
                         });
-                        debugger;
 
                         var postData = { values: selectedTeams };
                         console.log(postData);
@@ -120,7 +114,6 @@ var KTUsersList = function () {
                             "dataType": "json",
                             success: function (data) {
                                 if (data.success) {
-                                    debugger;
                                     Swal.fire({ text: "You have deleted all selected Teams!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
                                         .then(function () {
                                             c.forEach((t) => {
@@ -233,7 +226,6 @@ var KTUsersList = function () {
                     }),
                     l(),
                 document.querySelector('[data-kt-user-table-filter="search"]').addEventListener("keyup", function (t) {
-                    debugger;
                         datatable.search(t.target.value).draw();
                     }),
                     document.querySelector('[data-kt-user-table-filter="reset"]').addEventListener("click", function () {
