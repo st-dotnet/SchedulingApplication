@@ -1,4 +1,3 @@
-
 "use strict";
 var ModalUpdateCoaches = function () {
     var t, e, n, o, c, r;
@@ -6,21 +5,18 @@ var ModalUpdateCoaches = function () {
         init: function () {
             t = document.querySelector("#kt_modal_update_customer"), r = new bootstrap.Modal(t), c = t.querySelector("#kt_modal_update_customer_form"), e = c.querySelector("#kt_modal_update_customer_submit"), n = c.querySelector("#kt_modal_update_customer_cancel"), o = t.querySelector("#kt_modal_update_customer_close"), e.addEventListener("click", (function (t) {
                 t.preventDefault(), e.setAttribute("data-kt-indicator", "on"), setTimeout((function () {
-
-                    var formData = new FormData($('#kt_modal_update_customer_form')[0]);
-                    formData.append('baseImage', $('input[type=file]')[0].files[0]);
-                    formData.append('name', $('#name').val());
-                    formData.append('emailAddress', $('#EmailAddress').val());
-                    console.log(formData);
-
+                    var postCoachData = {
+                        id: $('#Id').val(),
+                        name: $('#Name').val(),
+                        emailAddress: $('#EmailAddress').val(),
+                    };
+                    console.log(postCoachData);
                     $.ajax({
                         type: "POST",
-                        url: '/Coach/AddCoach',
-                        data: formData,
-                        contentType: false,
-                        processData: false,
+                        url: '/Coach/UpdateCoach/{id}',
+                        data: postCoachData,
                         success: function (data) {
-                            console.log(data);
+
                         }
                     });
                     e.removeAttribute("data-kt-indicator"), Swal.fire({

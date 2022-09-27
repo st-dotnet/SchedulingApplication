@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SchedulingApplication.Data.Entities;
-using SchedulingApplication.Helpers;
 using SchedulingApplication.Infrastructure.Interface;
 using SchedulingApplication.Models;
 
@@ -28,7 +27,6 @@ namespace SchedulingApplication.Controllers
         {
 
             var data = _mapper.Map<Coach>(model);
-            data.Image = model.BaseImage?.ToBase64String();
             var result = await _coachServices.AddCoach(data);
 
             return Json(new
@@ -74,6 +72,19 @@ namespace SchedulingApplication.Controllers
         public async Task<ActionResult> DeleteCoach(int id)
         {
             var result = await _coachServices.DeleteCoachById(id);
+
+            return Json(new
+            {
+                Success = result
+            });
+
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateCoach(CoachModel model)
+        {
+            var data = _mapper.Map<Coach>(model);
+            var result = await _coachServices.AddCoach(data);
 
             return Json(new
             {
