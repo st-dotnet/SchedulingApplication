@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SchedulingApplication.Data.Entities;
@@ -7,7 +8,8 @@ using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
 {
-    public class GameScheduleController : Controller
+	[Authorize]
+	public class GameScheduleController : Controller
     {
         private readonly IGameScheduleServices _gameScheduleServices;
         private readonly IMapper _mapper;

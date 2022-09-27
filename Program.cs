@@ -39,7 +39,7 @@ builder.Services.Configure<AppSettings>(configuration.GetSection("AppSettings"))
 
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IEmailServices, EmailServices>();
-builder.Services.AddScoped<ILogInServices, LogInServices>();
+builder.Services.AddScoped<IAccountServices, AccountServices>();
 builder.Services.AddScoped<IGameScheduleServices, GameScheduleServices>();
 builder.Services.AddScoped<IPlayerServices, PlayerServices>();
 builder.Services.AddScoped<ICoachServices, CoachServices>();
@@ -75,6 +75,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=GameSchedule}/{action=ScheduleGames}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();
