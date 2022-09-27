@@ -14,14 +14,7 @@ var KTUsersAddUser = function () {
         var validator = FormValidation.formValidation(
             form,
             {
-                /*fields: {
-                    'Image': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Image is required'
-                            }
-                        }
-                    },
+                fields: {
                     'Name': {
                         validators: {
                             notEmpty: {
@@ -36,22 +29,15 @@ var KTUsersAddUser = function () {
                             }
                         }
                     },
-                    'CoachId': {
+                    'CoachName': {
                         validators: {
                             notEmpty: {
                                 message: 'Coach Name is required'
                             }
                         }
                     },
-                    'IsLookingClubPassPlayer': {
-                        validators: {
-                            notEmpty: {
-                                message: 'IsLookingClubPassPlayer is required'
-                            }
-                        }
-                    },
                 },
-*/
+
                 plugins: {
                     trigger: new FormValidation.plugins.Trigger(),
                     bootstrap: new FormValidation.plugins.Bootstrap5({

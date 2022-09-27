@@ -8,14 +8,14 @@ var KTModalCoachesAdd = function () {
                     name: {
                         validators: {
                             notEmpty: {
-                                message: "Customer name is required"
+                                message: "Coach name is required"
                             }
                         }
                     },
                     email: {
                         validators: {
                             notEmpty: {
-                                message: "Customer email is required"
+                                message: "Coach email is required"
                             }
                         }
                     },
@@ -96,33 +96,28 @@ var KTModalCoachesAdd = function () {
                         dataType: "json",
                         success: function (response) {
                             debugger;
-                            if (response.success) {
-
-                            }
-                        }
-                            
-                    }),
-                        
-                    console.log("validated!"), "Valid" == e ? (t.setAttribute("data-kt-indicator", "on"), t.disabled = !0, setTimeout((function () {
-                        t.removeAttribute("data-kt-indicator"), Swal.fire({
-                            text: "Form has been successfully submitted!",
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        }).then((function (e) {
-                            e.isConfirmed && (i.hide(), t.disabled = !1, window.location = "/Coach/Index")
-                        }))
-                    }), 2e3)) : Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
-                        icon: "error",
-                        buttonsStyling: !1,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
+                            console.log("validated!"), response.success ? (t.setAttribute("data-kt-indicator", "on"), t.disabled = !0, setTimeout((function () {
+                                t.removeAttribute("data-kt-indicator"), Swal.fire({
+                                    text: "Form has been successfully submitted!",
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                }).then((function (e) {
+                                    e.isConfirmed && (i.hide(), t.disabled = !1, window.location = "/Coach/Index")
+                                }))
+                            }), 2e3)) : Swal.fire({
+                                text: "Sorry, looks like there are some errors detected, please try again.",
+                                icon: "error",
+                                buttonsStyling: !1,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            })
+                        }  
                     })
                 }))
             })), e.addEventListener("click", (function (t) {
