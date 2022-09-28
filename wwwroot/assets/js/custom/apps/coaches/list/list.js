@@ -313,6 +313,20 @@ var KTCustomersList = function () {
                                         return `<div class="form-check form-check-sm form-check-custom form-check-solid"><input class="form-check-input checkBox" type="checkbox" data-id=${row.id} /></div>`;
                                     }
                                 },
+                                {
+                                    "data": "image",
+                                    "render": function (data, type, row, meta) {
+                                        return `<div class='symbol symbol-circle symbol-50px overflow-hidden me-3' >
+                                                  <div class='symbol-label'>
+                                                   <img src="data:image/png;base64, ${row.image}" alt="${row.name}">
+                                                  </div>
+                                                 </a>
+                                                </div>
+                                                <div class='d-flex flex-column'>
+                                                 <a href='#' class='text-gray-800 text-hover-primary mb-1'>${row.name}</a>
+                                                </div>`
+                                    }
+                                },
                                 { "data": "name", "name": "name", "autoWidth": true },
                                 { "data": "emailAddress", "name": "email", "autoWidth": true },
                                 {

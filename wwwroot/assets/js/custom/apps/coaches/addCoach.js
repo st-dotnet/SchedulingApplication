@@ -81,17 +81,20 @@ var KTModalCoachesAdd = function () {
                 n.revalidateField("country")
             })), t.addEventListener("click", (function (e) {
                 e.preventDefault(), n && n.validate().then((function (e) {
-                    console.log("Submit Button Clicked");
-                    var postCoach = {
-                        name: $('#Name').val(),
-                        emailaddress: $('#EmailAddress').val(),
-                    };
-                    console.log(postCoach);
+                    
+                    var formData = new FormData($('#modal_add_coach_form')[0]);
+                    formData.append('baseImage', $('input[type=file]')[0].files[0]);
+                    formData.append('name', $('#name').val());
+                    formData.append('emailAddress', $('#EmailAddress').val());
+                    console.log(formData);
+                    
                     $.ajax({
                         type: "POST",
                         url: "/Coach/AddCoach",
-                        data: postCoach,
-                        dataType: "json",
+                        data: formData,
+                        contentType: false,
+                        processData: false,
+                        /*dataType: "json",*/
                         success: function (response) {
                             console.log("validated!"), response.success ? (t.setAttribute("data-kt-indicator", "on"), t.disabled = !0, setTimeout((function () {
                                 t.removeAttribute("data-kt-indicator"), Swal.fire({
@@ -114,7 +117,7 @@ var KTModalCoachesAdd = function () {
                                     confirmButton: "btn btn-primary"
                                 }
                             })
-                        }  
+                        }
                     })
                 }))
             })), e.addEventListener("click", (function (t) {
