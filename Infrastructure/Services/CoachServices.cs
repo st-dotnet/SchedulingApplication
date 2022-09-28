@@ -23,9 +23,10 @@ namespace SchedulingApplication.Infrastructure.Services
                 var coach = _dbContext.Coaches.FirstOrDefault(c => c.Id == entity.Id);
                 if (coach != null)
                 {
-                    var coachFromDb = await _dbContext.Coaches.FindAsync(entity.Id);
-                    coachFromDb.Name = entity.Name;
-                    coachFromDb.EmailAddress = entity.EmailAddress;
+                    //var coachFromDb = await _dbContext.Coaches.FindAsync(entity.Id);
+                    coach.Image = entity.Image;
+                    coach.Name = entity.Name;
+                    coach.EmailAddress = entity.EmailAddress;
                     await _dbContext.SaveChangesAsync();
                 }
                 else
