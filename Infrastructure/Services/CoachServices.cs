@@ -13,7 +13,7 @@ namespace SchedulingApplication.Infrastructure.Services
         public CoachServices(SchedulingApplicationContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
-            _mapper = mapper;   
+            _mapper = mapper;
         }
 
         public async Task<bool> AddCoach(Coach entity)
@@ -60,7 +60,8 @@ namespace SchedulingApplication.Infrastructure.Services
 
         public async Task<bool> DeleteCoachById(int coachId)
         {
-            try
+            var objTeam = _dbContext.Teams.FirstOrDefault(c => c.CoachId == coachId);
+            if (objTeam == null)
             {
                 var result = _dbContext.Coaches.FirstOrDefault(e => e.Id == coachId);
 
@@ -70,18 +71,20 @@ namespace SchedulingApplication.Infrastructure.Services
                 _dbContext.Coaches.Remove(result);
                 return await _dbContext.SaveChangesAsync() > 0;
             }
-            catch (Exception ex)
+            else
             {
-                throw new Exception($"Error occured: {ex}");
+                return false;
             }
         }
 
-
         public async Task<bool> DeleteCoaches(List<int> coachesIds)
         {
-            try
+
+
+            foreach (int coachId in coachesIds)
             {
-                foreach (int coachId in coachesIds)
+                var objTeam = _dbContext.Teams.FirstOrDefault(x => x.CoachId == coachId);
+                if (objTeam == null)
                 {
                     var objCoach = _dbContext.Coaches.FirstOrDefault(e => e.Id == coachId);
 
@@ -90,13 +93,14 @@ namespace SchedulingApplication.Infrastructure.Services
 
                     _dbContext.Coaches.Remove(objCoach);
                 }
-                return await _dbContext.SaveChangesAsync() > 0;
-            }
-            catch (Exception)
-            {
+                else
+                {
+                    return false;
+                }
 
-                throw;
             }
+            return await _dbContext.SaveChangesAsync() > 0;
+
         }
 
         public JqueryDataTablesResult<CoachModel> GetAllCoachdetails(JqueryDataTablesParameters request)

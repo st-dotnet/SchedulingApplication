@@ -115,7 +115,7 @@ var KTCustomersList = function () {
                                 }
                                 else {
                                     Swal.fire({
-                                        text: customerName + " was not deleted.",
+                                        text: customerName + " was not deleted because it associated with Team.",
                                         icon: "error",
                                         buttonsStyling: false,
                                         confirmButtonText: "Ok, got it!",
@@ -206,7 +206,7 @@ var KTCustomersList = function () {
                         "data": postCoachData,
                         "dataType": "json",
                         success: function (data) {
-                            if (data.success) {
+                            if (data.success.result === true) {
                                 Swal.fire({
                                     text: "You have deleted all selected customers!.",
                                     icon: "success",
@@ -230,7 +230,7 @@ var KTCustomersList = function () {
 
                             } else {
                                 Swal.fire({
-                                    text: "Selected customers was not deleted.",
+                                    text: "Selected Coach can not be deleted, because it is associated with Team.",
                                     icon: "error",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok, got it!",

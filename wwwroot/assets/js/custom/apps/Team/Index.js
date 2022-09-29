@@ -30,17 +30,20 @@ var KTUsersList = function () {
                             url: "/Team/DeleteTeam?id=" + id,
                             type: "Delete",
                             success: function (data) {
+                                if (data.success === true) {
+                                    Swal.fire({ text: "You have deleted " + r + "!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
+                                        .then(function () {
+                                            window.location = "/Team/Index/";
+                                        })
+                                        .then(function () {
+                                            a();
+                                        });
+                                }
+                                else {
+                                    Swal.fire({ text: "Team was not deleted beacuse it is associated with Player or this team matches scheduled", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } });
+                                }
                             },
                         });
-                        t.value
-                            ? Swal.fire({ text: "You have deleted " + r + "!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
-                                .then(function () {
-                                    window.location = "/Team/Index/";
-                                })
-                                .then(function () {
-                                    a();
-                                })
-                            : "cancel" === t.dismiss && Swal.fire({ text: Team + " was not deleted.", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } });
                     });
                 });
             });
@@ -104,7 +107,6 @@ var KTUsersList = function () {
                                 selectedTeams.push($(this).attr('data-id'));
                             }
                         });
-
                         var postData = { values: selectedTeams };
                         console.log(postData);
                         $.ajax({
@@ -113,7 +115,7 @@ var KTUsersList = function () {
                             "data": postData,
                             "dataType": "json",
                             success: function (data) {
-                                if (data.success) {
+                                if (data.success.result === true) {
                                     Swal.fire({ text: "You have deleted all selected Teams!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
                                         .then(function () {
                                             c.forEach((t) => {
@@ -130,7 +132,7 @@ var KTUsersList = function () {
                                         });
 
                                 } else {
-                                    Swal.fire({ text: "Selected Teams was not deleted. Because it is associated with Player", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } });
+                                    Swal.fire({ text: "Selected Teams was not deleted. Because it is associated with Player or these teams matches scheduled", icon: "error", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } });
                                 }
                             },
                             "traditional": true,
