@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SchedulingApplication.Controllers
 {
-	[Authorize]
+	
 	public class UserController : Controller
     {
         private readonly IUserServices _userServices;

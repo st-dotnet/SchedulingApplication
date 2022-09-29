@@ -4,7 +4,9 @@ namespace SchedulingApplication.Infrastructure.Interface
 {
     public interface IAccountServices
     {
-        Task<bool> LogIn(LogInModel model);
+        Task<LoginResultModel> LogIn(LogInModel model);
 		Task<bool> LogOut();
+        Task<bool>ResetPassword(ResetPasswordModel resetPasswordModel, string email);
+
 	}
 }

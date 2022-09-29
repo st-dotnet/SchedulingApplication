@@ -56,6 +56,27 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
 builder.Services.AddHttpContextAccessor();
 
+
+builder.Services.Configure<MailKitEmailSenderOptions>(options =>
+{
+	options.Host_Address = "smtp-replay.sendinblue.com";
+	options.Host_Port = 587;
+	options.Host_Username = "Amit Rana";
+	options.Host_Password = "3TgnNYW91cAUzvaH";
+	options.Sender_EMail = "st.amit.ranaa@gmail.com";
+	options.Sender_Name = "Suprem";
+});
+
+//builder.Services.Configure<MailKitEmailSenderOptions>(options =>
+//{
+//	options.Host_Address = configuration["ExternalProviders:MailKit:SMTP:Address"];
+//	options.Host_Port = Convert.ToInt32(configuration["ExternalProviders:MailKit:SMTP:Port"]);
+//	options.Host_Username = configuration["ExternalProviders:MailKit:SMTP:Account"];
+//	options.Host_Password = configuration["ExternalProviders:MailKit:SMTP:Password"];
+//	options.Sender_EMail = configuration["ExternalProviders:MailKit:SMTP:SenderEmail"];
+//	options.Sender_Name = configuration["ExternalProviders:MailKit:SMTP:SenderName"];
+//});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
