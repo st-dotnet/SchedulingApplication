@@ -1010,12 +1010,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="AppSettings.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\upload\" />
   </ItemGroup>
 

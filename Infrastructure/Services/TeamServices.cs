@@ -59,46 +59,44 @@ namespace SchedulingApplication.Infrastructure.Services
 
         public async Task<bool> DeleteMultipleTeams(List<int> teamIds)
         {
-            try
+            foreach (int teamId in teamIds)
             {
-                foreach (int teamId in teamIds)
+                var objPlayer = _dbContext.Players.FirstOrDefault(t => t.TeamId == teamId);
+                var dbTeam = _dbContext.GameSchedules.FirstOrDefault(t => t.TeamId == teamId);
+                var dbPlayingAgainst = _dbContext.GameSchedules.FirstOrDefault(t => t.PlayingAgainstId == teamId);
+                if (objPlayer == null && dbTeam == null && dbPlayingAgainst == null)
                 {
-                    var objPlayer = _dbContext.Players.FirstOrDefault(t => t.Id == teamId);
-                    if (objPlayer == null)
-                    {
-                        var objteam = _dbContext.Teams.FirstOrDefault(t => t.Id == teamId);
+                    var objteam = _dbContext.Teams.FirstOrDefault(t => t.Id == teamId);
 
-                        if (objteam == null)
-                            throw new Exception("This team doesn't exist");
+                    if (objteam == null)
+                        throw new Exception("This team doesn't exist");
 
-                        _dbContext.Teams.Remove(objteam);
-                    }
-                    else
-                    {
-                        return false;
-                    }
-
+                    _dbContext.Teams.Remove(objteam);
                 }
-                return await _dbContext.SaveChangesAsync() > 0;
-            }
-            catch (Exception ex)
-            {
+                else
+                {
+                    return false;
+                }
 
-                throw new Exception(ex.Message);
             }
+            return await _dbContext.SaveChangesAsync() > 0;
+
         }
 
         public async Task<bool> DeleteTeamById(int TeamId)
         {
             try
             {
-                var dbPlayer = _dbContext.Players.FirstOrDefault(t => t.Id == TeamId);
-                if (dbPlayer == null)
+                var dbPlayer = _dbContext.Players.FirstOrDefault(t => t.TeamId == TeamId);
+                var dbTeam = _dbContext.GameSchedules.FirstOrDefault(t => t.TeamId == TeamId);
+                var dbPlayingAgainst = _dbContext.GameSchedules.FirstOrDefault(t => t.PlayingAgainstId == TeamId);
+
+                if (dbPlayer == null && dbTeam == null && dbPlayingAgainst == null)
                 {
-                    var result = _dbContext.Teams.FirstOrDefault(e => e.Id == TeamId);
-                    if (result == null)
+                    var resultTeam = _dbContext.Teams.FirstOrDefault(e => e.Id == TeamId);
+                    if (resultTeam == null)
                         throw new Exception("This Team doesn't exist.");
-                    _dbContext.Teams.Remove(result);
+                    _dbContext.Teams.Remove(resultTeam);
                 }
                 else
                 {
