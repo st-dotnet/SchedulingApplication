@@ -2,35 +2,58 @@
 using MimeKit;
 using MimeKit.Text;
 using SchedulingApplication.Infrastructure.Interface;
-using MailKit.Net.Smtp;
+using System.Net.Mail;
 using MailKit.Security;
+using FluentEmail.Core;
+using System.Net;
 
 namespace SchedulingApplication.Infrastructure.Services
 {
     public class EmailServices : IEmailServices
     {
         private IOptions<AppSettings> _appSettings;
+		private IOptions<MailKitEmailSenderOptions> _options;
 
-        public EmailServices(IOptions<AppSettings> appSettings)
+
+		public EmailServices(IOptions<AppSettings> appSettings, IOptions<MailKitEmailSenderOptions> options)
         {
             _appSettings = appSettings;
+			_options = options;
         }
 
-        public void Send(string to, string subject, string html, string from = null)
-        {
-            // create message
-            var email = new MimeMessage();
-            email.From.Add(MailboxAddress.Parse(from ?? _appSettings.Value.SmtpSettings.Email));
-            email.To.Add(MailboxAddress.Parse(to));
-            email.Subject = subject;
-            email.Body = new TextPart(TextFormat.Html) { Text = html };
+		public MailKitEmailSenderOptions Options { get; set; }
 
-            // send email
-            using var smtp = new SmtpClient();
-            smtp.Connect(_appSettings.Value.SmtpSettings.Server, (int)_appSettings.Value.SmtpSettings.Port, SecureSocketOptions.StartTls);
-            smtp.Authenticate(_appSettings.Value.SmtpSettings.EmailAddressOrders, _appSettings.Value.SmtpSettings.SmtpPasswordOrders);
-            smtp.Send(email);
-            smtp.Disconnect(true);
-        }
+		public bool Send(string to, string subject, string html, string from = null)
+		{
+			try
+			{
+				int port = 2525;
+				string host = "smtp.mailtrap.io";
+				string username = "848cf23ccb195c";
+				string password = "a19adf8e82dfc8";
+				string mailFrom = "rahulkatoch2000@gmail.com";
+				string mailTo = to;
+				string mailTitle = subject;
+				string mailMessage = html;
+				var message = new MimeMessage();
+				message.From.Add(new MailboxAddress(mailFrom, mailFrom));
+				message.To.Add(new MailboxAddress(mailTo, mailTo));
+				message.Subject = mailTitle;
+				message.Body = new TextPart("html") { Text = mailMessage };
+				using (var client = new MailKit.Net.Smtp.SmtpClient())
+				{
+					client.Connect(host, port, false);
+					client.Authenticate(username, password);
+					client.Send(message);
+					client.Disconnect(true);
+				}
+
+				return true;
+			}
+			catch (Exception ex)
+			{
+				return false;
+			}
+		}
     }
 }

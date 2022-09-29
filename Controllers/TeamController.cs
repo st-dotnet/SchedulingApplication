@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SchedulingApplication.Data.Entities;
@@ -8,6 +9,7 @@ using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
 {
+	[Authorize]
 	public class TeamController : Controller
 	{
 		private readonly ITeamService _teamService;

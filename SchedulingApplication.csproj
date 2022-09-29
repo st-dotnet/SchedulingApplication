@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <None Remove="Views\Coach\xhfz0vdo.n3o~" />
-    <None Remove="Views\LogIn\Index.cshtml~RF32fafb16.TMP" />
+    <None Remove="Views\Account\Index.cshtml~RF32fafb16.TMP" />
   </ItemGroup>
 
   <ItemGroup>

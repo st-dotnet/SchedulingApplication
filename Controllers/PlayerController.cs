@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SchedulingApplication.Data.Entities;
@@ -6,10 +7,10 @@ using SchedulingApplication.Helpers;
 using SchedulingApplication.Infrastructure.Interface;
 using SchedulingApplication.Models;
 
-
 namespace SchedulingApplication.Controllers
 {
-    public class PlayerController : Controller
+	[Authorize]
+	public class PlayerController : Controller
     {
         private readonly IPlayerServices _playerServices;
         private readonly IMapper _mapper;

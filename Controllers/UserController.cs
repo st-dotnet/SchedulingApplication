@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using SchedulingApplication.Infrastructure.Interface;
 using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SchedulingApplication.Controllers
 {
-    public class UserController : Controller
+	
+	public class UserController : Controller
     {
         private readonly IUserServices _userServices;
         private readonly IEmailServices _emailService;
