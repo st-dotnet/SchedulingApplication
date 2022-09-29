@@ -85,6 +85,19 @@ namespace SchedulingApplication.Controllers
         }
 
         [HttpPost]
+        public async Task<ActionResult> UpdateCoach(CoachModel model)
+        {
+            var data = _mapper.Map<Coach>(model);
+            var result = await _coachServices.AddCoach(data);
+
+            return Json(new
+            {
+                Success = result
+            });
+
+        }
+
+        [HttpPost]
         public async Task<ActionResult> DeleteMultipleCoach(List<int> values)
         {
             try

@@ -22,7 +22,7 @@
 									<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
 										<!--begin::Item-->
 										<li class="breadcrumb-item text-muted">
-											<a href="../../demo13/dist/index.html" class="text-muted text-hover-primary">Home</a>
+											<a href="/GameSchedule/ScheduleGames/" class="text-muted text-hover-primary">Home</a>
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
@@ -31,7 +31,7 @@
 										</li>
 										<!--end::Item-->
 										<!--begin::Item-->
-										<li class="breadcrumb-item text-muted">Coaches</li>
+										@*<li class="breadcrumb-item text-muted">Coaches</li>*@
 										<!--end::Item-->
 										<!--begin::Item-->
 										<li class="breadcrumb-item">
@@ -297,7 +297,7 @@
 												<tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
 													<th class="w-10px pe-2">
 														<div class="form-check form-check-sm form-check-custom form-check-solid me-3">
-															<input class="form-check-input" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
+															<input class="form-check-input" id="checkAllCoaches" type="checkbox" data-kt-check="true" data-kt-check-target="#kt_customers_table .form-check-input" value="" />
 														</div>
 													</th>
 													<th class="min-w-125px">Image</th>
@@ -352,7 +352,7 @@
 													<!--begin::Scroll-->
 													<div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#modal_add_coach_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
 														<!--begin::Input group-->
-                                                <div class="fv-row mb-7">
+															 <div class="fv-row mb-7">
                                                     <!--begin::Label-->
                                                     <label class="d-block fw-bold fs-6 mb-5">Avatar</label>
                                                     <!--end::Label-->
@@ -388,7 +388,7 @@
                                                     <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
                                                     <!--end::Hint-->
                                                 </div>
-                                                <!--end::Input group-->
+														<!--end::Input group-->
 														<!--begin::Input group-->
 														<div class="fv-row mb-7">
 															<!--begin::Label-->
@@ -398,8 +398,8 @@
 															<input type="text" asp-for="Name" class="form-control form-control-solid" placeholder="" name="name" />
 															<!--end::Input-->
 														</div>
-														<!--end::Input group-->
-														<!--begin::Input group-->
+															<!--end::Input group-->
+															<!--begin::Input group-->
 														<div class="fv-row mb-7">
 															<!--begin::Label-->
 															<label class="fs-6 fw-bold mb-2">
@@ -408,7 +408,7 @@
 															</label>
 															<!--end::Label-->
 															<!--begin::Input-->
-															<input type="email" asp-for="EmailAddress" class="form-control form-control-solid" placeholder="" name="emailaddress"/>
+															<input type="email" asp-for="EmailAddress" class="form-control form-control-solid" placeholder="" name="email"/>
 															<!--end::Input-->
 														</div>
 														<!--end::Input group-->
@@ -874,8 +874,8 @@
 													<!--end::Row-->
 													<!--begin::Actions-->
 													<div class="text-center">
-														<button type="reset" class="btn btn-light me-3">Discard</button>
-														<button type="submit" id="kt_customers_export_submit" asp-action="Index" class="btn btn-primary">
+														<button type="reset" id="kt_customers_export_cancel" class="btn btn-light me-3">Discard</button>
+														<button type="submit" id="kt_customers_export_submit" class="btn btn-primary">
 															<span class="indicator-label">Submit</span>
 															<span class="indicator-progress">Please wait...
 															<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -902,7 +902,7 @@
 
 @section Scripts
 {
-	<script src="~/assets/js/custom/apps/coaches/addCoach.js" asp-append-version="true"></script>
+	@*<script src="~/assets/js/custom/apps/coaches/addCoach.js" asp-append-version="true"></script>
 	<script src="~/assets/js/custom/apps/coaches/list/list.js" asp-append-version="true"></script>
 	<script src="~/assets/js/custom/apps/coaches/list/export.js" asp-append-version="true"></script>
 	<script src="~/assets/js/custom/apps/coaches/list/updateCoach.js" asp-append-version="true"></script>
@@ -910,4 +910,13 @@
 	<script src="assets/js/custom/widgets.js" asp-append-version="true"></script>
     <script src="assets/js/custom/modals/create-app.js" asp-append-version="true"></script>
     <script src="assets/js/custom/modals/upgrade-plan.js" asp-append-version="true"></script>
+*@
+
+	 
+
+		<script src="~/assets/js/custom/apps/coaches/list/export.js" asp-append-version="true"></script>
+		<script src="~/assets/js/custom/apps/coaches/list/list.js" asp-append-version="true"></script>
+		<script src="~/assets/js/custom/apps/coaches/addCoach.js" asp-append-version="true"></script>
+		<script src="~/assets/js/custom/apps/coaches/updateCoach.js" asp-append-version="true"></script>
+		
 }

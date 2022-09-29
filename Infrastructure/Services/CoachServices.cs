@@ -13,7 +13,7 @@ namespace SchedulingApplication.Infrastructure.Services
         public CoachServices(SchedulingApplicationContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
-            _mapper = mapper;
+            _mapper = mapper;   
         }
 
         public async Task<bool> AddCoach(Coach entity)
