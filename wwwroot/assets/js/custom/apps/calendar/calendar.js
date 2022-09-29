@@ -307,7 +307,6 @@ var KTAppCalendar = function () {
             if (validator) {
                 validator.validate().then(function (status) {
                     console.log('validated!');
-
                     if (status == 'Valid') {
                         // Show loading indication
                         submitButton.setAttribute('data-kt-indicator', 'on');
@@ -324,7 +323,7 @@ var KTAppCalendar = function () {
                         var endDateTime = moment(endFlatpickr.selectedDates[endFlatpickr.selectedDates.length - 1]).format();
                         if (!allDayEvent) {
                             const startDate = moment(startFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
-                            const endDate = startDate;
+                            const endDate = moment(endFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
                             const startTime = moment(startTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
                             const endTime = moment(endTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
 
@@ -489,18 +488,15 @@ var KTAppCalendar = function () {
                             // Detect if is all day event
                             let allDayEvent = false;
                             if (allDayToggle.checked) { allDayEvent = true; }
-                            if (startTimeFlatpickr.selectedDates.length === 0) { allDayEvent = true; }
-
+                            if (startTimeFlatpickr.selectedDates.length === 0) { allDayEvent = true; } 
                             // Merge date & time
                             var startDateTime = moment(startFlatpickr.selectedDates[0]).format();
                             var endDateTime = moment(endFlatpickr.selectedDates[endFlatpickr.selectedDates.length - 1]).format();
                             if (!allDayEvent) {
                                 const startDate = moment(startFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
-                                const endDate = startDate;
+                                const endDate = moment(endFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
                                 const startTime = moment(startTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
                                 const endTime = moment(endTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
-
-
 
                                 startDateTime = startDate + 'T' + startTime;
                                 endDateTime = endDate + 'T' + endTime;

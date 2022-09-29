@@ -126,7 +126,6 @@ var KTSignupGeneral = function () {
 
                                 // Enable button
                                 submitButton.disabled = false;
-                                alert("Hello");
                                 // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
 
@@ -141,6 +140,7 @@ var KTSignupGeneral = function () {
                                     if (result.isConfirmed) {
                                         form.reset();  // reset form                    
                                         passwordMeter.reset();  // reset password meter
+                                        window.location = "/Account/Login";
                                         //form.submit();
                                     }
                                 });
