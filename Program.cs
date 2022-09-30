@@ -45,6 +45,7 @@ builder.Services.AddScoped<IPlayerServices, PlayerServices>();
 builder.Services.AddScoped<ICoachServices, CoachServices>();
 builder.Services.AddScoped<CustomCookieAuthenticationEvents>();
 builder.Services.AddScoped<ITeamService, TeamService>();
+builder.Services.AddScoped<IDashboardServices, DashboardServices>();
 builder.Services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
