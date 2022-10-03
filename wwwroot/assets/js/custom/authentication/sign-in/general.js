@@ -55,7 +55,7 @@ var KTSigninGeneral = function () {
                                         }
                                     }).then((function (e) {
                                         e.isConfirmed && (t.querySelector('[name="email"]').value = "", t.querySelector('[name="password"]').value = "")
-                                        window.location = "/Player/Index"
+                                        window.location = "/Dashboard/Index"
                                     }))
                                 }), 2e3))
                             }
