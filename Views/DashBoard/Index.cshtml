@@ -3378,9 +3378,114 @@
 										<!--end::Table-->
 									</div>*@
 						<!--end::End Table-->
+						<div class="post d-flex flex-column-fluid" id="kt_post" style="margin-left: 142px;">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl" style="width: 60%;">
+            <!--begin::Card-->
+            <div class="card" style="height: 500px;overflow: scroll;">
 
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Table-->
+					<h1 style="padding-top: 15px;font-weight: 600;font-size: 1.275rem;">Teams</h1>
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_subscriptions_table">
+                        <!--begin::Table head-->
+                        <thead>
+                            <!--begin::Table row-->
+                            <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+
+                                <th class="min-w-125px">Image</th>
+                                <th class="min-w-125px">Team Name</th>
+
+                            </tr>
+                            <!--end::Table row-->
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody class="text-gray-600 fw-bold">
+                           
+                              @foreach(var team in ViewBag.team) {
+                                <tr>
+                                    <td> 
+                                        <div class='symbol symbol-circle symbol-50px overflow-hidden me-3' >
+                                            <div class='symbol-label'>
+                                                <img id="coach_img_details" src= "data:image/png;base64,@team.Image" alt="@team.Name">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>@team.Name</td>                               
+                                 </tr>
+                              }
+
+                        </tbody>
+                        <!--end::Table body-->
+                    </table>
+                    <!--end::Table-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+
+        </div>
+        <!--end::Container-->
+
+		<!--Coach Table-->
+
+	
+	<div class="post d-flex flex-column-fluid" id="kt_post" style="width:47%">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <!--begin::Card-->
+            <div class="card" style="height: 500px;overflow: scroll;max-width: 485px;">
+
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Table-->
+					<h1 style="padding-top: 15px;font-weight: 600;font-size: 1.275rem;">Coaches</h1>
+                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_subscriptions_table">
+                        <!--begin::Table head-->
+                        <thead>
+                            <!--begin::Table row-->
+                            <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+
+                                <th class="min-w-125px">Image</th>
+                                <th class="min-w-125px">Coach Name</th>
+
+                            </tr>
+                            <!--end::Table row-->
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody class="text-gray-600 fw-bold">
+                           
+                              @foreach(var coach in ViewBag.coach) {
+                                <tr>
+                                    <td> 
+                                        <div class='symbol symbol-circle symbol-50px overflow-hidden me-3' >
+                                            <div class='symbol-label'>
+                                                <img id="coach_img_details" src= "data:image/png;base64,@coach.Image" alt="@coach.Name">
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>@coach.Name</td>                               
+                                 </tr>
+                              }
+
+                        </tbody>
+                        <!--end::Table body-->
+                    </table>
+                    <!--end::Table-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+
+        </div>
+        <!--end::Container-->
+    </div>
+    </div>
 						<!--begin::Post-->
-						<div class="post d-flex flex-column-fluid" id="kt_post">
+						<div class="post d-flex flex-column-fluid" id="kt_post" style="margin-top:30px;">
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
 								<div class="card">
@@ -7060,7 +7165,7 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Card-->
-            <div class="card" style="height: 538px;overflow: scroll; max-width: 598px;margin-left: auto;">
+            <div class="card" style="height: 538px;overflow: scroll; max-width: 598px;">
 
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
@@ -7110,60 +7215,7 @@
 
 
 
-	<!--Coach Table-->
-
 	
-	<div class="post d-flex flex-column-fluid" id="kt_post">
-        <!--begin::Container-->
-        <div id="kt_content_container" class="container-xxl">
-            <!--begin::Card-->
-            <div class="card" style="height: 538px;overflow: scroll;max-width: 600px;">
-
-                <!--begin::Card body-->
-                <div class="card-body pt-0">
-                    <!--begin::Table-->
-					<h1 style="padding-top: 15px;font-weight: 600;font-size: 1.275rem;">Coaches</h1>
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_subscriptions_table">
-                        <!--begin::Table head-->
-                        <thead>
-                            <!--begin::Table row-->
-                            <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-
-                                <th class="min-w-125px">Image</th>
-                                <th class="min-w-125px">Coach Name</th>
-
-                            </tr>
-                            <!--end::Table row-->
-                        </thead>
-                        <!--end::Table head-->
-                        <!--begin::Table body-->
-                        <tbody class="text-gray-600 fw-bold">
-                           
-                              @foreach(var coach in ViewBag.coach) {
-                                <tr>
-                                    <td> 
-                                        <div class='symbol symbol-circle symbol-50px overflow-hidden me-3' >
-                                            <div class='symbol-label'>
-                                                <img id="coach_img_details" src= "data:image/png;base64,@coach.Image" alt="@coach.Name">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>@coach.Name</td>                               
-                                 </tr>
-                              }
-
-                        </tbody>
-                        <!--end::Table body-->
-                    </table>
-                    <!--end::Table-->
-                </div>
-                <!--end::Card body-->
-            </div>
-            <!--end::Card-->
-
-        </div>
-        <!--end::Container-->
-    </div>
 	</div>
 
 
@@ -7173,73 +7225,11 @@
 
 
 
-	<div class="post d-flex flex-column-fluid" id="kt_post">
-        <!--begin::Container-->
-        <div id="kt_content_container" class="container-xxl" style="margin-left: 443px;">
-            <!--begin::Card-->
-            <div class="card" style="height: 500px;overflow: scroll;">
-
-                <!--begin::Card body-->
-                <div class="card-body pt-0">
-                    <!--begin::Table-->
-					<h1 style="padding-top: 15px;font-weight: 600;font-size: 1.275rem;">Teams</h1>
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_subscriptions_table">
-                        <!--begin::Table head-->
-                        <thead>
-                            <!--begin::Table row-->
-                            <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
-
-                                <th class="min-w-125px">Image</th>
-                                <th class="min-w-125px">Team Name</th>
-
-                            </tr>
-                            <!--end::Table row-->
-                        </thead>
-                        <!--end::Table head-->
-                        <!--begin::Table body-->
-                        <tbody class="text-gray-600 fw-bold">
-                           
-                              @foreach(var team in ViewBag.team) {
-                                <tr>
-                                    <td> 
-                                        <div class='symbol symbol-circle symbol-50px overflow-hidden me-3' >
-                                            <div class='symbol-label'>
-                                                <img id="coach_img_details" src= "data:image/png;base64,@team.Image" alt="@team.Name">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>@team.Name</td>                               
-                                 </tr>
-                              }
-
-                        </tbody>
-                        <!--end::Table body-->
-                    </table>
-                    <!--end::Table-->
-                </div>
-                <!--end::Card body-->
-            </div>
-            <!--end::Card-->
-
-        </div>
-        <!--end::Container-->
-    </div>
 	
-
-
-
+	
     <!--end::Post-->
 </div>
 <!--end::Content-->
- 
-
-
-
-
-
-
-
-
 	</body>
 	<!--end::Body-->	
 
