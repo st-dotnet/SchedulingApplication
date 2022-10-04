@@ -117,19 +117,19 @@ var KTUsersAddUser = function () {
                                         customClass: {
                                             confirmButton: "btn btn-primary"
                                         }
-                                    });
-
-                                    // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                                    setTimeout(function () {
-                                        // Remove loading indication
-                                        submitButton.removeAttribute('data-kt-indicator');
-
-                                        // Enable button
-                                        submitButton.disabled = false;
-
-                                        //form.submit(); // Submit form
-                                    }, 2000);
+                                    }); 
                                 }
+
+                                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                setTimeout(function () {
+                                    // Remove loading indication
+                                    submitButton.removeAttribute('data-kt-indicator');
+
+                                    // Enable button
+                                    submitButton.disabled = false;
+
+                                    //form.submit(); // Submit form
+                                }, 2000);
                             }
                         });
                     }
