@@ -33,7 +33,7 @@ var KTUsersList = function () {
                                 if (data.success === true) {
                                     Swal.fire({ text: "You have deleted " + r + "!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
                                         .then(function () {
-                                            window.location = "/Team/Index/";
+                                            $('#kt_table_teams').DataTable().ajax.reload();
                                         })
                                         .then(function () {
                                             a();

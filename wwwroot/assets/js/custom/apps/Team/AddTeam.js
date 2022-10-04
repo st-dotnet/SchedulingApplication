@@ -103,7 +103,7 @@ var KTUsersAddUser = function () {
                                     }).then(function (result) {
                                         if (result.isConfirmed) {
                                             modal.hide();
-                                            window.location = "/Team/Index";
+                                            $('#kt_table_teams').DataTable().ajax.reload()
                                         }
                                     });
                                 }

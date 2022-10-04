@@ -307,7 +307,9 @@ var KTAppCalendar = function () {
             if (validator) {
                 validator.validate().then(function (status) {
                     console.log('validated!');
+                    console.log("Submit button Add New Event");
                     if (status == 'Valid') {
+                        
                         // Show loading indication
                         submitButton.setAttribute('data-kt-indicator', 'on');
                         // Disable submit button whilst loading
@@ -400,7 +402,6 @@ var KTAppCalendar = function () {
 
                                             // Reset form for demo purposes only
                                             form.reset();
-                                            window.location = "/GameSchedule/ScheduleGames/";
                                         }
                                     });
                                 }
@@ -470,6 +471,7 @@ var KTAppCalendar = function () {
             if (validator) {
                 validator.validate().then(function (status) {
                     console.log('validated!');
+                    console.log("Submit button Event in the Edit Event");
 
                     if (status == 'Valid') {
                         // Show loading indication
@@ -522,7 +524,7 @@ var KTAppCalendar = function () {
                                     if (response.success) {
                                         // Show popup confirmation 
                                         Swal.fire({
-                                            text: "New event added to calendar!",
+                                            text: "Event has been updated to calendar!",
                                             icon: "success",
                                             buttonsStyling: false,
                                             confirmButtonText: "Ok, got it!",
@@ -538,42 +540,8 @@ var KTAppCalendar = function () {
                                                 submitButton.disabled = false;
                                                 console.log(response.success);
 
-                                                // Detect if is all day event
-                                                //let allDayEvent = false;
-                                                //if (allDayToggle.checked) { allDayEvent = true; }
-                                                //if (startTimeFlatpickr.selectedDates.length === 0) { allDayEvent = true; }
-
-                                                //// Merge date & time
-                                                //var startDateTime = moment(startFlatpickr.selectedDates[0]).format();
-                                                //var endDateTime = moment(endFlatpickr.selectedDates[endFlatpickr.selectedDates.length - 1]).format();
-                                                //if (!allDayEvent) {
-                                                //    const startDate = moment(startFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
-                                                //    const endDate = startDate;
-                                                //    const startTime = moment(startTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
-                                                //    const endTime = moment(endTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
-
-                                                //    startDateTime = startDate + 'T' + startTime;
-                                                //    endDateTime = endDate + 'T' + endTime;
-                                                //}
-
-                                                //// Add new event to calendar
-
-                                                //// Add new event to calendar
-                                                //calendar.addEvent({
-
-                                                //    id: uid(),
-                                                //    title: eventName.value,
-                                                //    description: eventDescription.value,
-                                                //    location: eventLocation.value,
-                                                //    hometeam: eventhomeTeam.value,
-                                                //    awayteam: eventawayTeam.value,
-                                                //    start: startDateTime,
-                                                //    end: endDateTime,
-                                                //    allDay: allDayEvent
-                                                //   });
-
                                                 //calendar.render();
-                                                window.location = "/GameSchedule/ScheduleGames/";
+                                                calendar.refetchEvents();
 
                                                //Reset form for demo purposes only
                                                form.reset();
@@ -586,54 +554,6 @@ var KTAppCalendar = function () {
                                     }
                                 }
                             });
-
-                            //// Show popup confirmation 
-                            //Swal.fire({
-                            //    text: "New event added to calendar!",
-                            //    icon: "success",
-                            //    buttonsStyling: false,
-                            //    confirmButtonText: "Ok, got it!",
-                            //    customClass: {
-                            //        confirmButton: "btn btn-primary"
-                            //    }
-                            //}).then(function (result) {
-                            //    if (result.isConfirmed) {
-                            //        modal.hide();
-
-                            //        // Enable submit button after loading
-                            //        submitButton.disabled = false;
-
-                            //        // Remove old event
-                            //        calendar.getEventById(data.id).remove();
-
-                                    
-
-
-                                    
-
-
-                                    
-
-                            //        //// Add new event to calendar
-                            //        //calendar.addEvent({
-                            //        //    id: uid(),
-                            //        //    title: eventName.value,
-                            //        //    description: eventDescription.value,
-                            //        //    location: eventLocation.value,
-                            //        //    hometeam: eventhomeTeam.value,
-                            //        //    awayteam: eventawayTeam.value,
-                            //        //    start: startDateTime,
-                            //        //    end: endDateTime,
-                            //        //    allDay: allDayEvent
-                            //        //});
-                            //        /*calendar.render();*/
-
-                            //        // Reset form for demo purposes only
-                            //        /*form.reset();*/
-                            //    }
-                            //});
-
-                            //form.submit(); // Submit form
                         }, 2000);
                     } else {
                         // Show popup warning 

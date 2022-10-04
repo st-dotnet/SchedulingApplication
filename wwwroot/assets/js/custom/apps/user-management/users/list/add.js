@@ -1,4 +1,4 @@
-"use strict";
+/*"use strict";*/
 
 // Class definition
 var KTUsersAddUser = function () {
@@ -6,6 +6,7 @@ var KTUsersAddUser = function () {
     const element = document.getElementById('kt_modal_add_user');
     const form = element.querySelector('#kt_modal_add_user_form');
     const modal = new bootstrap.Modal(element);
+
 
     // Init add schedule modal
     var initAddUser = () => {
@@ -86,6 +87,7 @@ var KTUsersAddUser = function () {
                             success: function (data) {
                                 if (data.success) {
                                     // Show popup confirmation 
+                                    console.log(data);
                                     Swal.fire({
                                         text: "Form has been successfully submitted!",
                                         icon: "success",
@@ -97,7 +99,7 @@ var KTUsersAddUser = function () {
                                     }).then(function (result) {
                                         if (result.isConfirmed) {
                                             modal.hide();
-                                            window.location = "/Player/Index";
+                                            $('#kt_table_users').DataTable().ajax.reload();
                                         }
                                     });
                                 }
@@ -112,18 +114,17 @@ var KTUsersAddUser = function () {
                                             confirmButton: "btn btn-primary"
                                         }
                                     });
-
-                                    // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                                    setTimeout(function () {
-                                        // Remove loading indication
-                                        submitButton.removeAttribute('data-kt-indicator');
-
-                                        // Enable button
-                                        submitButton.disabled = false;
-
-                                        //form.submit(); // Submit form
-                                    }, 2000);
                                 }
+                                // Simulate form submission. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                                setTimeout(function () {
+                                    // Remove loading indication
+                                    submitButton.removeAttribute('data-kt-indicator');
+
+                                    // Enable button
+                                    submitButton.disabled = false;
+
+                                    //form.submit(); // Submit form
+                                }, 2000);
                             }
                         });
                     }
