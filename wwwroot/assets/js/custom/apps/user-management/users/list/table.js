@@ -36,7 +36,7 @@ var KTUsersList = function () {
                         t.value
                             ? Swal.fire({ text: "You have deleted " + r + "!.", icon: "success", buttonsStyling: !1, confirmButtonText: "Ok, got it!", customClass: { confirmButton: "btn fw-bold btn-primary" } })
                                 .then(function () {
-                                    window.location = "/Player/Index/";
+                                    $('#kt_table_users').DataTable().ajax.reload();
                                 })
                                 .then(function () {
                                     a();

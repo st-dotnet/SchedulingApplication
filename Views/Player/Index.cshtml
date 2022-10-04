@@ -204,39 +204,6 @@
                                 <!--end::Header-->
                                 <!--begin::Separator-->
                                 <div class="separator border-gray-200"></div>
-                                <!--end::Separator-->
-                                <!--begin::Content-->
-                                @*<div class="px-7 py-5" data-kt-user-table-filter="form">
-                                <!--begin::Input group-->
-                                <div class="mb-10">
-                                <label class="form-label fs-6 fw-bold">Role:</label>
-                                <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="role" data-hide-search="true">
-                                <option></option>
-                                <option value="Administrator">Administrator</option>
-                                <option value="Analyst">Analyst</option>
-                                <option value="Developer">Developer</option>
-                                <option value="Support">Support</option>
-                                <option value="Trial">Trial</option>
-                                </select>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="mb-10">
-                                <label class="form-label fs-6 fw-bold">Two Step Verification:</label>
-                                <select class="form-select form-select-solid fw-bolder" data-kt-select2="true" data-placeholder="Select option" data-allow-clear="true" data-kt-user-table-filter="two-step" data-hide-search="true">
-                                <option></option>
-                                <option value="Enabled">Enabled</option>
-                                </select>
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Actions-->
-                                <div class="d-flex justify-content-end">
-                                <button type="reset" class="btn btn-light btn-active-light-primary fw-bold me-2 px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="reset">Reset</button>
-                                <button type="submit" class="btn btn-primary fw-bold px-6" data-kt-menu-dismiss="true" data-kt-user-table-filter="filter">Apply</button>
-                                </div>
-                                <!--end::Actions-->
-                                </div>*@
-                                <!--end::Content-->
                             </div>
                             <!--end::Menu 1-->
                             <!--end::Filter-->
@@ -472,97 +439,14 @@
                                                 <!--end::Input group-->
                                                 <!--begin::Input group-->
                                                 <div class="mb-7">
-                                                    <!--begin::Label-->
-                                                    @*<label class="required fw-bold fs-6 mb-5">Role</label>*@
-                                                    <!--end::Label-->
-                                                    <!--end::Label-->
-                                                    <!--begin::Roles-->
-                                                    <!--begin::Input row-->
-                                                    <div class="d-flex fv-row">
-                                                        <label for="Role">ClubPass Player</label>
-                                                        <input type="checkbox" id="IsClubPassPlayer" name="isclub" value="true" checked />
+                                                    <div class="d-flex fv-row" style="column-gap: 10px;">
+                                                        <label for="Role" style="font-weight: 500;font-size: 1.075rem;">ClubPass Player</label>
+                                                        <input type="checkbox" id="IsClubPassPlayer" name="isclub" value="true" style="width: 15px;" checked />
                                                         <!--begin::Radio-->
-                                                        @*<div class="form-check form-check-custom form-check-solid">
-                                                        <label for="Role">ClubPassPlayer</label>
-
-                                                        <!--begin::Input-->
-
-                                                        <!--end::Input-->
-                                                        <!--begin::Label-->
-                                                        @*<label class="form-check-label" for="kt_modal_update_role_option_0">
-                                                        <div class="fw-bolder text-gray-800">Administrator</div>
-                                                        <div class="text-gray-600">Best for business owners and company administrators</div>
-                                                        </label>*@
                                                         <!--end::Label-->
                                                     </div>
                                                     <!--end::Radio-->
                                                 </div>
-                                                <!--end::Input row-->
-                                                @*<div class='separator separator-dashed my-5'></div>*@
-                                                <!--begin::Input row-->
-                                                @*<div class="d-flex fv-row">
-                                                    <!--begin::Radio-->
-                                                    <div class="form-check form-check-custom form-check-solid">
-                                                        <!--end::Radio-->
-                                                    </div>
-                                                    <!--end::Input row-->
-                                                    <div class='separator separator-dashed my-5'></div>
-                                                    <!--begin::Input row-->
-                                                    <div class="d-flex fv-row">
-                                                        <!--begin::Radio-->
-                                                        <div class="form-check form-check-custom form-check-solid">
-                                                            <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="2" id="kt_modal_update_role_option_2" />
-                                                            <!--end::Input-->
-                                                            <!--begin::Label-->
-                                                            <label class="form-check-label" for="kt_modal_update_role_option_2">
-                                                                <div class="fw-bolder text-gray-800">Analyst</div>
-                                                                <div class="text-gray-600">Best for people who need full access to analytics data, but don't need to update business settings</div>
-                                                            </label>
-                                                            <!--end::Label-->
-                                                        </div>
-                                                        <!--end::Radio-->
-                                                    </div>
-                                                    <!--end::Input row-->
-                                                    <div class='separator separator-dashed my-5'></div>
-                                                    <!--begin::Input row-->
-                                                    <div class="d-flex fv-row">
-                                                        <!--begin::Radio-->
-                                                        <div class="form-check form-check-custom form-check-solid">
-                                                            <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="3" id="kt_modal_update_role_option_3" />
-                                                            <!--end::Input-->
-                                                            <!--begin::Label-->
-                                                            <label class="form-check-label" for="kt_modal_update_role_option_3">
-                                                                <div class="fw-bolder text-gray-800">Support</div>
-                                                                <div class="text-gray-600">Best for employees who regularly refund payments and respond to disputes</div>
-                                                            </label>
-                                                            <!--end::Label-->
-                                                        </div>
-                                                        <!--end::Radio-->
-                                                    </div>
-                                                    <!--end::Input row-->
-                                                    <div class='separator separator-dashed my-5'></div>
-                                                    <!--begin::Input row-->
-                                                    <div class="d-flex fv-row">
-                                                        <!--begin::Radio-->
-                                                        <div class="form-check form-check-custom form-check-solid">
-                                                            <!--begin::Input-->
-                                                            <input class="form-check-input me-3" name="user_role" type="radio" value="4" id="kt_modal_update_role_option_4" />
-                                                            <!--end::Input-->
-                                                            <!--begin::Label-->
-                                                            <label class="form-check-label" for="kt_modal_update_role_option_4">
-                                                                <div class="fw-bolder text-gray-800">Trial</div>
-                                                                <div class="text-gray-600">Best for people who need to preview content data, but don't need to make any updates</div>
-                                                            </label>
-                                                            <!--end::Label-->
-                                                        </div>
-                                                        <!--end::Radio-->
-                                                    </div>
-                                                    <!--end::Input row-->
-                                                    <!--end::Roles-->
-                                                </div>*@
-                                                <!--end::Input group-->
                                             </div>
 
                                             <!--end::Scroll-->
@@ -634,32 +518,6 @@
     {
     <script src="~/assets/js/custom/apps/user-management/users/list/table.js" asp-append-version="true"></script>
     <script src="~/assets/js/custom/apps/user-management/users/list/add.js" asp-append-version="true"></script>
-    @*<script>
-        $(".fileUpload").on('change', function() {
-            debugger;
-            var formData = new FormData($('#kt_modal_add_user_form')[0]);// form Id - formUploadInvoice
-            formData.append('image', $('input[type=file]')[0].files[0]);
-            var fileUploaded = document.forms['kt_modal_add_user_form']['imageUpload'].files.length > 0;
-            if (!fileUploaded) {
-                return;
-            }
-            var postData = {
-                image:formData
-            }
-            console.log(formData);
-
-            //$.ajax({
-            //    type: 'POST',
-            //    url: "/Player/ImageUpload",
-            //    data: formData,
-            //    contentType: false,
-            //    processData: false,
-            //    success: (result) => {
-            //        //success action
-            //    }
-            //});
-        });
-    </script>*@
 }
 
 

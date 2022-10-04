@@ -372,16 +372,6 @@ var KTCustomersList = function () {
                     })
                     ,
                     (() => {
-                         /*const t = document.querySelector('[data-kt-customer-table-filter="delete_row"]'),*/
-                        //n = t.querySelector('[data-kt-customer-table-filter="delete_selected"]'),
-                        //r = t.querySelectorAll("selected");
-                        //n.addEventListener("click", function () {
-                        //    var t = "";
-                        //    r.forEach((e, n) => {
-                        //        e.value && "" !== e.value && (0 !== n && (t += " "), (t += e.value));
-                        //    }),
-                        //        datatable.search(t).draw();
-                        //});
                     })()
                 );
 

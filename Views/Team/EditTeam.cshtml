@@ -13,7 +13,7 @@
 			<!--begin::Page title-->
 			<div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
 				<!--begin::Title-->
-				<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">View User Details</h1>
+				<h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">View Team Details</h1>
 				<!--end::Title-->
 				<!--begin::Separator-->
 				<span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -21,33 +21,24 @@
 				<!--begin::Breadcrumb-->
 				<ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
 					<!--begin::Item-->
-					<li class="breadcrumb-item text-muted">
-						<a href="../../demo13/dist/index.html" class="text-muted text-hover-primary">Home</a>
-					</li>
+					
 					<!--end::Item-->
 					<!--begin::Item-->
 					<li class="breadcrumb-item">
 						<span class="bullet bg-gray-200 w-5px h-2px"></span>
 					</li>
 					<!--end::Item-->
-					<!--begin::Item-->
-					<li class="breadcrumb-item text-muted">User Management</li>
-					<!--end::Item-->
+					
 					<!--begin::Item-->
 					<li class="breadcrumb-item">
 						<span class="bullet bg-gray-200 w-5px h-2px"></span>
 					</li>
 					<!--end::Item-->
-					<!--begin::Item-->
-					<li class="breadcrumb-item text-muted">Users</li>
-					<!--end::Item-->
+					
 					<!--begin::Item-->
 					<li class="breadcrumb-item">
 						<span class="bullet bg-gray-200 w-5px h-2px"></span>
 					</li>
-					<!--end::Item-->
-					<!--begin::Item-->
-					<li class="breadcrumb-item text-dark">View User</li>
 					<!--end::Item-->
 				</ul>
 				<!--end::Breadcrumb-->
@@ -2873,12 +2864,9 @@
 											<label class="fs-6 fw-bold mb-2">Is Looking Club Pass Player</label>
 											<!--end::Label-->
 											<!--begin::Input-->
-											<input type="text" asp-for="IsLookingClubPassPlayer" class="form-control form-control-solid" placeholder="" name="description" />
+											<input type="checkbox" id="IsClubPassPlayer" name="isclub" value="true"  checked />
 											<!--end::Input-->
 										</div>
-
-										<label for="Role">ClubPass Player</label>
-										<input type="checkbox" id="IsClubPassPlayer" name="isclub" value="true"  checked />
 										<!--end::Input group-->
 															
 									</div>

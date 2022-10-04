@@ -8,8 +8,8 @@ using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
 {
-	[Authorize]
-	public class GameScheduleController : Controller
+    [Authorize]
+    public class GameScheduleController : Controller
     {
         private readonly IGameScheduleServices _gameScheduleServices;
         private readonly IMapper _mapper;
@@ -37,7 +37,7 @@ namespace SchedulingApplication.Controllers
             ViewBag.GameTeamsData = _gameScheduleServices?.GetTeams()
                     .Select(i => new SelectListItem
                     {
-                        Value = i.Id.ToString(),    
+                        Value = i.Id.ToString(),
                         Text = i.Name
                     }).ToList();
 
@@ -55,14 +55,13 @@ namespace SchedulingApplication.Controllers
         public async Task<IActionResult> AddGameSchedule(GameScheduleModel model)
         {
 
-                var data = _mapper.Map<GameSchedule>(model);
-                var result = await _gameScheduleServices.ScheduleGames(data);
+            var data = _mapper.Map<GameSchedule>(model);
+            var result = await _gameScheduleServices.ScheduleGames(data);
 
-                return Json(new
-                {
-                    Success = result
-                });
-            
+            return Json(new
+            {
+                Success = result
+            });
         }
 
         [HttpGet]
@@ -82,13 +81,13 @@ namespace SchedulingApplication.Controllers
                     Start = x.StartDate,
                     End = x.EndDate,
                     Location = x.FieldLocation?.Name,
-                    ClassName =x.IsOverlap == true? "fc-event-danger fc-event-solid-warning bg-warning" : "fc-event-solid-warning"
+                    ClassName = x.IsOverlap == true ? "fc-event-danger fc-event-solid-warning bg-warning" : "fc-event-solid-warning"
                 }).ToList();
 
                 return Json(result);
             }
             catch (Exception)
-            { 
+            {
                 throw;
             }
         }

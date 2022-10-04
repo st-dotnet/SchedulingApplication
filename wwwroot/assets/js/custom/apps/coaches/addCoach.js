@@ -94,7 +94,6 @@ var KTModalCoachesAdd = function () {
                         data: formData,
                         contentType: false,
                         processData: false,
-                        /*dataType: "json",*/
                         success: function (response) {
                             console.log("validated!"), response.success ? (t.setAttribute("data-kt-indicator", "on"), t.disabled = !0, setTimeout((function () {
                                 t.removeAttribute("data-kt-indicator"), Swal.fire({
@@ -106,7 +105,7 @@ var KTModalCoachesAdd = function () {
                                         confirmButton: "btn btn-primary"
                                     }
                                 }).then((function (e) {
-                                    e.isConfirmed && (i.hide(), t.disabled = !1, window.location = "/Coach/Index")
+                                    e.isConfirmed && (i.hide(), t.disabled = !1, $('#kt_customers_table').DataTable().ajax.reload())
                                 }))
                             }), 2e3)) : Swal.fire({
                                 text: "Sorry, looks like there are some errors detected, please try again.",
