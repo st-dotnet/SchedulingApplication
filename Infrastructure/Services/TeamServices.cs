@@ -173,6 +173,17 @@ namespace SchedulingApplication.Infrastructure.Services
             }
         }
 
+        public  List<GameSchedule> GetGameSchedule(int TeamId)
+        {
+            var gameSchedule =  _dbContext.GameSchedules.Where(x => x.TeamId == TeamId).Include(x => x.PlayingAgainstTeam)
+                    .Include(x => x.FieldLocation)
+                    .Include(x => x.GameType)
+                    .Include(x => x.PlayingAgainstTeam)
+                    .ToList();
+
+            return gameSchedule;
+        }
+
         public List<Player> GetPlayersByTeamId(int TeamId)
         {
             try

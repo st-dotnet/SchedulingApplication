@@ -47,7 +47,7 @@ namespace SchedulingApplication.Infrastructure.Services
                 var gameSchedule = _dbContext.GameSchedules.FirstOrDefault(u => u.Id == entity.Id);
                 if (gameSchedule == null)
                 {
-                    checkEdit = true;
+                    checkEdit = false;
                     gameSchedule = entity;
                     FindConflict(entity);
                     gameSchedule.CreatedOn = DateTime.UtcNow;
@@ -56,7 +56,7 @@ namespace SchedulingApplication.Infrastructure.Services
                 }
                 else
                 {
-                    checkEdit = false;
+                    checkEdit = true;
                     FindConflict(entity);
                     gameSchedule.Name = entity.Name;
                     gameSchedule.GameTypeId = entity.GameTypeId;
