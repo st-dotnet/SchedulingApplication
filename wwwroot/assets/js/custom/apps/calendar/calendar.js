@@ -272,10 +272,150 @@ var KTAppCalendar = function () {
         });
     }
 
+    const handleSubmitEvent = (e) => {
+        // Prevent default button action
+        e.preventDefault();
+        // Validate form before submit
+        if (validator) {
+            validator.validate().then(function (status) {
+                console.log('validated!');
+                console.log("Submit button Add New Event");
+                if (status == 'Valid') {
+
+                    // Show loading indication
+                    submitButton.setAttribute('data-kt-indicator', 'on');
+                    // Disable submit button whilst loading
+                    submitButton.disabled = true;
+                    const allDayToggle = form.querySelector('#kt_calendar_datepicker_allday');
+
+                    let allDayEvent = false;
+                    if (allDayToggle.checked) { allDayEvent = true; }
+                    if (startTimeFlatpickr.selectedDates.length === 0) { allDayEvent = true; }
+
+                    // Merge date & time
+                    var startDateTime = moment(startFlatpickr.selectedDates[0]).format();
+                    var endDateTime = moment(endFlatpickr.selectedDates[endFlatpickr.selectedDates.length - 1]).format();
+                    if (!allDayEvent) {
+                        const startDate = moment(startFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
+                        const endDate = moment(endFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
+                        const startTime = moment(startTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
+                        const endTime = moment(endTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
+
+                        startDateTime = startDate + 'T' + startTime;
+                        endDateTime = endDate + 'T' + endTime;
+                    }
+
+                    var postData = {
+                        name: $('#Name').val(),
+                        gameTypeId: $('#GameTypeId').val(),
+                        teamId: $('#TeamId').val(),
+                        playingAgainstId: $('#PlayingAgainstId').val(),
+                        fieldLocationId: $('#FieldLocationId').val(),
+                        startdate: startDateTime,
+                        enddate: endDateTime,
+                    };
+
+                    debugger;
+                    $.ajax({
+                        type: "POST",
+                        url: "/GameSchedule/AddGameSchedule",
+                        data: postData,
+                        dataType: "json",
+                        success: function (response) {
+                            debugger;
+                            if (response.success) {
+                                submitButton.removeEventListener("click", handleSubmitEvent, true);
+                                // Show popup confirmation 
+                                debugger;
+                                Swal.fire({
+                                    text: "New event added to calendar!",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                }).then(function (result) {
+                                    if (result.isConfirmed) {
+                                        modal.hide();
+                                        submitButton.setAttribute('data-kt-indicator', 'off');
+
+                                        // Enable submit button after loading
+                                        submitButton.disabled = false;
+
+                                        // Detect if is all day event
+                                        let allDayEvent = false;
+                                        if (allDayToggle.checked) { allDayEvent = true; }
+                                        if (startTimeFlatpickr.selectedDates.length === 0) { allDayEvent = true; }
+
+                                        // Merge date & time
+                                        var startDateTime = moment(startFlatpickr.selectedDates[0]).format();
+                                        var endDateTime = moment(endFlatpickr.selectedDates[endFlatpickr.selectedDates.length - 1]).format();
+                                        if (!allDayEvent) {
+                                            const startDate = moment(startFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
+                                            const endDate = startDate;
+                                            const startTime = moment(startTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
+                                            const endTime = moment(endTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
+
+                                            startDateTime = startDate + 'T' + startTime;
+                                            endDateTime = endDate + 'T' + endTime;
+                                        }
+
+                                        debugger;
+                                        // Add new event to calendar
+                                        calendar.addEvent({
+                                            id: uid(),
+                                            title: eventName.value,
+                                            description: $("#GameTypeId :selected").text(),
+                                            location: $("#FieldLocationId :selected").text(),
+                                            hometeam: $("#TeamId :selected").text(),
+                                            awayteam: $("#PlayingAgainstId :selected").text(),
+                                            start: startDateTime,
+                                            end: endDateTime,
+                                            allDay: allDayEvent
+                                        });
+
+                                        calendar.render();
+                                        debugger;
+                                        // Reset form for demo purposes only
+                                        form.reset();
+                                        initCalendarApp();
+                                        submitButton.setAttribute('data-kt-indicator', 'off');
+                                    }
+                                });
+                            }
+                            else {
+                                toastr.error("Error while inserting data", "Error");
+                                submitButton.setAttribute('data-kt-indicator', 'off');
+                            }
+                        },
+                        error: function (response) {
+                            toastr.error("Error while inserting data", "Error");
+                            submitButton.setAttribute('data-kt-indicator', 'off');
+                        }
+                    });
+                } else {
+                    // Show popup warning 
+                    Swal.fire({
+                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                    submitButton.setAttribute('data-kt-indicator', 'off');
+                }
+            });
+        }
+    };
+
     // Handle add new event
     const handleNewEvent = () => {
         // Update modal title
         modalTitle.innerText = "Add a New Event";
+        console.log("Add a New Event");
 
         modal.show();
 
@@ -298,139 +438,9 @@ var KTAppCalendar = function () {
         });
 
         populateForm(data);
-
+         
         // Handle submit form
-        submitButton.addEventListener('click', function (e) {
-            // Prevent default button action
-            e.preventDefault();
-            // Validate form before submit
-            if (validator) {
-                validator.validate().then(function (status) {
-                    console.log('validated!');
-                    console.log("Submit button Add New Event");
-                    if (status == 'Valid') {
-                        
-                        // Show loading indication
-                        submitButton.setAttribute('data-kt-indicator', 'on');
-                        // Disable submit button whilst loading
-                        submitButton.disabled = true;
-                        const allDayToggle = form.querySelector('#kt_calendar_datepicker_allday');
-
-                        let allDayEvent = false;
-                        if (allDayToggle.checked) { allDayEvent = true; }
-                        if (startTimeFlatpickr.selectedDates.length === 0) { allDayEvent = true; }
-
-                        // Merge date & time
-                        var startDateTime = moment(startFlatpickr.selectedDates[0]).format();
-                        var endDateTime = moment(endFlatpickr.selectedDates[endFlatpickr.selectedDates.length - 1]).format();
-                        if (!allDayEvent) {
-                            const startDate = moment(startFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
-                            const endDate = moment(endFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
-                            const startTime = moment(startTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
-                            const endTime = moment(endTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
-
-                            startDateTime = startDate + 'T' + startTime;
-                            endDateTime = endDate + 'T' + endTime;
-                        }
-
-                        var postData = {
-                            name: $('#Name').val(),
-                            gameTypeId: $('#GameTypeId').val(),
-                            teamId: $('#TeamId').val(),
-                            playingAgainstId: $('#PlayingAgainstId').val(),
-                            fieldLocationId: $('#FieldLocationId').val(),
-                            startdate: startDateTime,
-                            enddate: endDateTime,
-                        };
-
-
-                        $.ajax({
-                            type: "POST",
-                            url: form.action,
-                            data: postData,
-                            dataType: "json",
-                            success: function (response) {
-                                if (response.success) {
-                                    // Show popup confirmation 
-                                    Swal.fire({
-                                        text: "New event added to calendar!",
-                                        icon: "success",
-                                        buttonsStyling: false,
-                                        confirmButtonText: "Ok, got it!",
-                                        customClass: {
-                                            confirmButton: "btn btn-primary"
-                                        }
-                                    }).then(function (result) {
-                                        if (result.isConfirmed) {
-                                            modal.hide();
-                                            submitButton.setAttribute('data-kt-indicator', 'off');
-
-                                            // Enable submit button after loading
-                                            submitButton.disabled = false;
-
-                                            // Detect if is all day event
-                                            let allDayEvent = false;
-                                            if (allDayToggle.checked) { allDayEvent = true; }
-                                            if (startTimeFlatpickr.selectedDates.length === 0) { allDayEvent = true; }
-
-                                            // Merge date & time
-                                            var startDateTime = moment(startFlatpickr.selectedDates[0]).format();
-                                            var endDateTime = moment(endFlatpickr.selectedDates[endFlatpickr.selectedDates.length - 1]).format();
-                                            if (!allDayEvent) {
-                                                const startDate = moment(startFlatpickr.selectedDates[0]).format('YYYY-MM-DD');
-                                                const endDate = startDate;
-                                                const startTime = moment(startTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
-                                                const endTime = moment(endTimeFlatpickr.selectedDates[0]).format('HH:mm:ss');
-
-                                                startDateTime = startDate + 'T' + startTime;
-                                                endDateTime = endDate + 'T' + endTime;
-                                            }
-
-                                            // Add new event to calendar
-                                            calendar.addEvent({
-                                                id: uid(),
-                                                title: eventName.value,
-                                                description: $("#GameTypeId :selected").text(),
-                                                location: $("#FieldLocationId :selected").text(),
-                                                hometeam: $("#TeamId :selected").text(),
-                                                awayteam: $("#PlayingAgainstId :selected").text(),
-                                                start: startDateTime,
-                                                end: endDateTime,
-                                                allDay: allDayEvent
-                                            });
-                                            calendar.render();
-
-                                            // Reset form for demo purposes only
-                                            form.reset();
-                                        }
-                                    });
-                                }
-                                else {
-                                    toastr.error("Error while inserting data", "Error");
-                                    submitButton.setAttribute('data-kt-indicator', 'off');
-                                }
-                            },
-                            error: function (response) {
-                                toastr.error("Error while inserting data", "Error");
-                                submitButton.setAttribute('data-kt-indicator', 'off');
-                            }
-                        });
-                    } else {
-                        // Show popup warning 
-                        Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                        submitButton.setAttribute('data-kt-indicator', 'off');
-                    }
-                });
-            }
-        });
+        submitButton.addEventListener('click', handleSubmitEvent , true);
     }
 
     // Handle edit event
@@ -574,6 +584,7 @@ var KTAppCalendar = function () {
 
     // Handle view event
     const handleViewEvent = () => {
+        debugger;
         viewModal.show();
 
         // Detect all day event
@@ -760,7 +771,6 @@ var KTAppCalendar = function () {
 
     // Populate form 
     const populateForm = () => {
-
         console.log("populateForm");
         eventName.value = data.eventName ? data.eventName : '';
         $("#Name option:contains(" + data.eventName + ")").attr('selected', 'selected');

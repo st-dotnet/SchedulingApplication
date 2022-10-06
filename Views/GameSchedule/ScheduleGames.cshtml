@@ -213,7 +213,7 @@
                                         <label class="fs-6 fw-bold mb-2">Home Team</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <select class="form-control form-control-solid" asp-for="TeamId" asp-items="ViewBag.GameTeamsData"></select>
+                                        <select asp-for="TeamId" class="form-control form-control-solid"  asp-items="ViewBag.GameTeamsData"></select>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -223,7 +223,7 @@
                                         <label class="fs-6 fw-bold mb-2">Away Team</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <select  class="form-control form-control-solid" asp-for="PlayingAgainstId" asp-items="ViewBag.GameTeamsData"></select>
+                                        <select name="PlayingAgainstId"  asp-for="PlayingAgainstId"  class="form-control form-control-solid" asp-items="ViewBag.GameTeamsData"></select>
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -459,15 +459,7 @@
                                     <!--end::Event location-->
                                 </div>
                                 <!--end::Row--></div>
-                                  
-                                    <!--begin::Icon-->
-                                  
                                 </div>
-                                <!--end::Row-->
-                                <!--begin::Row-->
-                              
-                                <!--end::Row-->
-                               
                             </div>
                             <!--end::Modal body-->
                         </div>
@@ -486,5 +478,4 @@
 @section Scripts{
     <script src="~/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js" asp-append-version="true"></script>
     <script src="~/assets/js/custom/apps/calendar/calendar.js" asp-append-version="true"></script>
-	<script src="~/assets/plugins/custom/datatables/datatables.bundle.js" asp-append-version="true"></script>
 }

@@ -79,6 +79,27 @@ namespace SchedulingApplication.Controllers
 
 				var team = _teamService?.TeamDetails(id);
 				var teamModel = _mapper.Map<TeamModel>(team);
+
+
+				var gameschedule = new List<CalenderDetailModel>();
+
+
+				ViewBag.gameschedule = _teamService.GetGameSchedule(id)?.Select(x => new CalenderDetailModel
+				{
+					Id = x.Id,
+					Title = x.Name,
+					Description = x.GameType?.Name,
+					HomeTeam = x.Team?.Name,
+					AwayTeam = x.PlayingAgainstTeam?.Name,
+					Start = x.StartDate,
+					End = x.EndDate,
+					Location = x.FieldLocation?.Name,
+					ClassName = x.IsOverlap == true ? "fc-event-danger fc-event-solid-warning bg-warning" : "fc-event-solid-warning"
+				}).ToList();
+
+				//ViewBag.gameschedule = _teamService?.GetGameSchedule(id);
+				
+
 				return View(teamModel);
 			}
 			catch (Exception ex)

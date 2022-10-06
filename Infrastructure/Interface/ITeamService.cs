@@ -14,5 +14,6 @@ namespace SchedulingApplication.Infrastructure.Interface
 		List<Player> GetPlayersByTeamId(int TeamId);
 		Task<bool> DeleteTeamById(int TeamId);
 		Task<bool> DeleteMultipleTeams(List<int> teamIds);
+		List<GameSchedule> GetGameSchedule(int TeamId);
 	}
 }
