@@ -68,8 +68,7 @@ var KTUsersAddUser = function () {
                         // Disable button to avoid multiple click 
                         submitButton.disabled = true;
 
-
-                        if ($('#IsClubPassPlayer').prop('checked')) {
+                        if ($('#IsLookingClubPassPlayer').prop('checked')) {
                             var isclub = true;
                         }
                         else {
