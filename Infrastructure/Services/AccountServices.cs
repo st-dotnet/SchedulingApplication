@@ -5,10 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-using SchedulingApplication.Helpers;
-using Microsoft.AspNetCore.Identity;
-using SchedulingApplication.Data.Entities;
-using Nancy;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SchedulingApplication.Infrastructure.Services
 {

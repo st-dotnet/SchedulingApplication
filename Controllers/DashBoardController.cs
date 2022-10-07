@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Infrastructure.Interface;
 
 namespace SchedulingApplication.Controllers
 {
+    [Authorize(Roles = "Player,Coach,Admin")]
     public class DashBoardController : Controller
     {
         private readonly IPlayerServices _playerServices;

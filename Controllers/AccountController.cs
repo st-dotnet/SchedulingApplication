@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SchedulingApplication.Data;
-using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Helpers;
 using SchedulingApplication.Infrastructure.Interface;
 using SchedulingApplication.Models;
@@ -48,6 +44,7 @@ namespace SchedulingApplication.Controllers
                 throw;
             } 
         }
+        
 		public async Task<IActionResult> Logout()
 		{
 			await _accountServices.LogOut();

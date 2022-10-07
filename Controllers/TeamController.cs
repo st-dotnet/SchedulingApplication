@@ -9,7 +9,7 @@ using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
 {
-	[Authorize]
+	[Authorize(Roles = "Admin")]
 	public class TeamController : Controller
 	{
 		private readonly ITeamService _teamService;
@@ -96,9 +96,6 @@ namespace SchedulingApplication.Controllers
 					Location = x.FieldLocation?.Name,
 					ClassName = x.IsOverlap == true ? "fc-event-danger fc-event-solid-warning bg-warning" : "fc-event-solid-warning"
 				}).ToList();
-
-				//ViewBag.gameschedule = _teamService?.GetGameSchedule(id);
-				
 
 				return View(teamModel);
 			}

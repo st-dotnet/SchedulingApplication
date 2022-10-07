@@ -8,7 +8,7 @@ using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Coach")]
     public class GameScheduleController : Controller
     {
         private readonly IGameScheduleServices _gameScheduleServices;

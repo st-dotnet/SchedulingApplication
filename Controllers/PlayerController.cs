@@ -9,8 +9,8 @@ using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
 {
-	[Authorize]
-	public class PlayerController : Controller
+    [Authorize(Roles = "Admin,Player")]
+    public class PlayerController : Controller
     {
         private readonly IPlayerServices _playerServices;
         private readonly IMapper _mapper;
@@ -20,6 +20,7 @@ namespace SchedulingApplication.Controllers
             _playerServices = playerServices;
             _mapper = mapper;
         }
+
         public IActionResult Index()
         {
             ViewBag.GameTeamsData = _playerServices?.GetTeamsForPlayer()
@@ -61,7 +62,26 @@ namespace SchedulingApplication.Controllers
 
                 var player =  _playerServices?.GetPlayerDetails(id);
                 var playerModel = _mapper.Map<PlayerModel>(player); 
+                
+
+                var gameschedule = new List<CalenderDetailModel>();
+
+
+                ViewBag.gameschedulePlayer = _playerServices.GetGameSchedulesForPlayer(id)?.Select(x => new CalenderDetailModel
+                {
+                    Id = x.Id,
+                    Title = x.Name,
+                    Description = x.GameType?.Name,
+                    HomeTeam = x.Team?.Name,
+                    AwayTeam = x.PlayingAgainstTeam?.Name,
+                    Start = x.StartDate,
+                    End = x.EndDate,
+                    Location = x.FieldLocation?.Name,
+                    ClassName = x.IsOverlap == true ? "fc-event-danger fc-event-solid-warning bg-warning" : "fc-event-solid-warning"
+                }).ToList();
+
                 return View(playerModel);
+
             }
             catch (Exception)
             { 
