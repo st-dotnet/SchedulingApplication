@@ -39,6 +39,7 @@ ConfigurationManager configuration = builder.Configuration;
 builder.Services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
 
 builder.Services.AddScoped<IUserServices, UserServices>();
+builder.Services.AddScoped<IPlayerCornerService, PlayerCornerService>();
 builder.Services.AddScoped<IEmailServices, EmailServices>();
 builder.Services.AddScoped<IAccountServices, AccountServices>();
 builder.Services.AddScoped<IGameScheduleServices, GameScheduleServices>();
