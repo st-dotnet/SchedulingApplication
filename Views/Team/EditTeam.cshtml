@@ -132,7 +132,7 @@
 						</li>
 						<li class="nav-item">
 							<input type="hidden" id="playerTeamId" value="@Model.Id"/>
-							<a class="nav-link text-active-primary pb-4"  data-bs-toggle="tab" id="player" value="@Model.Id" data-id="@Model.Id" onclick="GetPlayers()" href="#">Players</a>
+							<a class="nav-link text-active-primary pb-4"  data-bs-toggle="tab" id="player" value="@Model.Id" data-id="@Model.Id"  href="#kt_user_view_Player_tab">Players</a>
 						</li>
 					</ul>
 					<!--end:::Tabs-->
@@ -195,6 +195,70 @@
 							<!--end::Card-->
 						</div>
 						<!--end:::Tab pane-->
+
+
+						<div class="tab-pane fade" id="kt_user_view_Player_tab" role="tabpanel">
+							<div class="card card-flush mb-6 mb-xl-9">
+								<div class="card-header mt-6">
+									<!--begin::Card title-->
+									<div class="card-title flex-column">
+										<h2 class="mb-1">Players List</h2>
+										<div class="fs-6 fw-bold text-muted">Players List</div>
+									</div>
+								</div>
+
+					<!--begin::Card body-->
+								<div class="card-body p-9 pt-4">
+								<table class="table align-middle table-row-dashed fs-6 gy-5" id="teamPlayer_Table">
+									 <!--begin::Table head-->
+									<thead>
+										<!--begin::Table row-->
+										<tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0">
+
+											<th class="min-w-125px">Image</th>
+											<th class="min-w-125px">Player Name</th>
+											<th class="min-w-125px">Email</th>
+											<th class="min-w-125px">Age</th>
+											<th class="min-w-125px">Is Club Pass Player</th>
+
+										</tr>
+										<!--end::Table row-->
+									</thead>
+									<!--end::Table head-->
+									<!--begin::Table body-->
+									<tbody class="text-gray-600 fw-bold">
+                           
+										  @foreach(var player in ViewBag.playerForTeam) {
+											<tr>
+												<td> 
+													<div class='symbol symbol-circle symbol-50px overflow-hidden me-3' >
+														<div class='symbol-label'>
+															<img id="coach_img_details" src= "data:image/png;base64,@player.Image" alt="@player.PlayerName">
+														</div>
+													</div>
+												</td>
+												<td>@player.PlayerName</td>
+												<td>@player.EmailAddress</td>                                 
+												<td>@player.Age</td>                                 
+												<td>@player.IsClubPassPlayer</td>                                 
+											  </tr>
+											}
+
+									</tbody>
+                      
+							    </table>
+
+								</div>
+								<!--end::Card body-->
+
+							</div>
+						</div>
+						
+
+
+
+
+
 					</div>
 					<!--end:::Tab content-->
 				</div>

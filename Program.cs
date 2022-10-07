@@ -55,10 +55,21 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 })
-.AddCookie(
-    options => options.LoginPath = "/Account/GoogleLogin"
-    )
-/*.AddCookie(a => a.LoginPath = "/Account/FacebookLogin")*/
+.AddCookie(options =>
+    {
+        options.LoginPath = "/Account/GoogleLogin";
+
+
+        options.Events = new CookieAuthenticationEvents()
+        {
+            OnRedirectToAccessDenied = (context) =>
+            {
+                context.HttpContext.Response.Redirect("https://localhost:7188/Account/AccessDenied");
+                return Task.CompletedTask;
+            }
+        };
+    }
+)
 .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
 {
     options.ClientId = "890649700085-8laqskeqs1tu82hqmn06q2r1cji0lmit.apps.googleusercontent.com";
@@ -94,6 +105,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseExceptionHandler("/Account/AccessDenied");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

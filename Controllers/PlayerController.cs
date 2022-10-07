@@ -9,7 +9,7 @@ using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
 {
-    [Authorize(Roles = "Admin,Player")]
+    [Authorize(Roles = "Admin,Player, Coach")]
     public class PlayerController : Controller
     {
         private readonly IPlayerServices _playerServices;

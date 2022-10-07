@@ -97,6 +97,10 @@ namespace SchedulingApplication.Controllers
 					ClassName = x.IsOverlap == true ? "fc-event-danger fc-event-solid-warning bg-warning" : "fc-event-solid-warning"
 				}).ToList();
 
+
+
+				ViewBag.playerForTeam = _teamService?.GetPlayersByTeamId(id);
+
 				return View(teamModel);
 			}
 			catch (Exception ex)
@@ -120,14 +124,6 @@ namespace SchedulingApplication.Controllers
 		}
 
 
-		[HttpGet]
-		public IActionResult GetPlayers(int teamId)
-		{
-			var Player = _teamService?.GetPlayersByTeamId(teamId);
-			ViewBag.Players = Player;
-			return View();
-
-		}
 		[HttpDelete]
 		public async Task<ActionResult> DeleteTeam(int id)
 		{

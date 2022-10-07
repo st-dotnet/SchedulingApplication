@@ -224,5 +224,11 @@ namespace SchedulingApplication.Controllers
 			return RedirectToAction("Login");
 		}
 
+
+		public IActionResult AccessDenied()
+        {
+			return View();
+        }
+
 	}
 }
