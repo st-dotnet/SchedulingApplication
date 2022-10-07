@@ -136,6 +136,18 @@ namespace SchedulingApplication.Infrastructure.Services
             };
         }
 
+        public List<GameSchedule> GetGameSchedulesForPlayer(int playerId)
+        {
+            var player = _dbContext.Players.FirstOrDefault(x => x.Id == playerId);
+            var  gameSchedule = _dbContext.GameSchedules.Where(x => x.TeamId == player.TeamId).Include(x => x.PlayingAgainstTeam)
+                    .Include(x => x.FieldLocation)
+                    .Include(x => x.GameType)
+                    .Include(x => x.PlayingAgainstTeam)
+                    .ToList();
+
+            return gameSchedule;
+        }
+
         public Player? GetPlayerDetails(int playerId)
         {
             try

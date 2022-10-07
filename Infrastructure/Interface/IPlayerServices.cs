@@ -14,6 +14,6 @@ namespace SchedulingApplication.Infrastructure.Interface
         Player? GetPlayerDetails(int playerId);
 
         Task<bool> DeletePlayers(List<int> playersIds);
-        //Task AddPlayer(Player data);
+        List<GameSchedule> GetGameSchedulesForPlayer(int playerId);
     }
 }

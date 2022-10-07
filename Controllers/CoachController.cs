@@ -9,7 +9,7 @@ using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin,Coach")]
     public class CoachController : Controller
     {
         private readonly ICoachServices _coachServices;

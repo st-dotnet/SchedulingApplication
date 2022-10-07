@@ -7,12 +7,10 @@ namespace SchedulingApplication.Infrastructure.Services
     public class UserServices : IUserServices
     {
         private readonly SchedulingApplicationContext _dbContext;
-        private readonly  IEmailServices _emailService;
 
-        public UserServices(SchedulingApplicationContext dbContext, IEmailServices emailService)
+        public UserServices(SchedulingApplicationContext dbContext)
         {
-            _dbContext = dbContext;
-            _emailService = emailService;   
+            _dbContext = dbContext;  
         }
 
         /// <summary>

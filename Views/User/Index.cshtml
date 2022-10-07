@@ -121,8 +121,9 @@
                                 <div style="display: flex;column-gap: 40px;margin-top: 15px;">
                                     @foreach (var item in ViewBag.Roles)
                                     {
-
-                                        <div class="form-check">
+                                        @if (@item.Name.ToString() != "Admin")
+                                        {
+                                            <div class="form-check">
                                             <input class="form-check-input flexRadioDefault" asp-for="RoleId" type="radio" value="@item.Id" style="height: 16px;width: 16px;" checked>
                                             <b>
                                                 <label class="form-check-label" for="coach">
@@ -130,6 +131,7 @@
                                                 </label>
                                             </b>
                                         </div>
+                                        } 
                                     }
                                 </div>
                             </div>
