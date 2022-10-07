@@ -36,7 +36,6 @@ var KTSigninGeneral = function () {
                         email: $('#Email').val(),
                         password: $('#Password').val(),
                     };
-
                     console.log(signInformData);
                     $.ajax({
                         url: '/Account/LogInUser/',
@@ -55,7 +54,13 @@ var KTSigninGeneral = function () {
                                         }
                                     }).then((function (e) {
                                         e.isConfirmed && (t.querySelector('[name="email"]').value = "", t.querySelector('[name="password"]').value = "")
-                                        window.location = "/Dashboard/Index"
+                                        if (response.result.message == "Admin") {
+                                            window.location = "/Dashboard/Index"
+                                        } else if (response.result.message == "Coach") {
+                                            window.location = "/GameSchedule/ScheduleGames"
+                                        } else {
+                                            window.location = "/PlayerCorner/Index"
+                                        }
                                     }))
                                 }), 2e3))
                             }

@@ -70,7 +70,8 @@ namespace SchedulingApplication.Infrastructure.Services
 
 				return new LoginResultModel
 				{
-					Success = true
+					Success = true,
+					Message = role
 				};
 			}
 			catch (Exception ex)
