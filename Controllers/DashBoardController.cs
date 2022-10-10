@@ -5,7 +5,7 @@ using SchedulingApplication.Infrastructure.Interface;
 
 namespace SchedulingApplication.Controllers
 {
-    [Authorize(Roles = "Player,Coach,Admin")]
+    [Authorize(Roles = "Coach,Admin")]
     public class DashBoardController : Controller
     {
         private readonly IPlayerServices _playerServices;

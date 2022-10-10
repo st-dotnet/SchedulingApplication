@@ -54,12 +54,12 @@
 						<!--begin::Aside Menu-->
 						<div class="hover-scroll-overlay-y my-2 py-5 py-lg-8" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside_menu" data-kt-scroll-offset="0" style="height: 497px;">
 							<!--begin::Menu-->
-							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
+							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="kt_aside_menu" data-kt-menu="true">
 								
 								@if(role == "Admin")
 								{
 									<div class="menu-item">
-										<a class="menu-link active" href="/Dashboard/Index">
+										<a class="menu-link" href="/Dashboard/Index">
 											<span class="menu-icon">
 												<i class="bi bi-grid fs-3"></i>
 											</span>
@@ -4552,7 +4552,7 @@
 		</div>
 		<!--end::Scrolltop-->
 
-	<script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="~/js/jquery.min.js" asp-append-version="true"></script>
      <script src="~/js/site.js" asp-append-version="true"></script>
      <script src="~/js/toastr.js" asp-append-version="true"></script>
     <script src="~/js/ui-toastr.js" asp-append-version="true"></script>
@@ -4567,6 +4567,8 @@
 		<script src="~/assets/js/custom/apps/chat/chat.js" asp-append-version="true"></script>
 		<script src="~/assets/js/custom/modals/create-app.js" asp-append-version="true"></script>
 		<script src="~/assets/js/custom/modals/upgrade-plan.js" asp-append-version="true"></script>
+		
+	    
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>
