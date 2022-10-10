@@ -9,19 +9,21 @@ using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
 {
-    [Authorize(Roles = "Admin,Player, Coach")]
+	[Authorize(Roles = "Admin,Player, Coach")]
     public class PlayerController : Controller
     {
         private readonly IPlayerServices _playerServices;
         private readonly IMapper _mapper;
+        private readonly IUserServices _userServices;
 
-        public PlayerController(IPlayerServices playerServices, IMapper mapper)
-        {
-            _playerServices = playerServices;
-            _mapper = mapper;
-        }
+        public PlayerController(IPlayerServices playerServices, IMapper mapper, IUserServices userServices)
+		{
+			_playerServices = playerServices;
+			_mapper = mapper;
+			_userServices = userServices;
+		}
 
-        public IActionResult Index()
+		public IActionResult Index()
         {
             ViewBag.GameTeamsData = _playerServices?.GetTeamsForPlayer()
                     .Select(i => new SelectListItem
@@ -67,7 +69,7 @@ namespace SchedulingApplication.Controllers
                 var gameschedule = new List<CalenderDetailModel>();
 
 
-                ViewBag.gameschedulePlayer = _playerServices.GetGameSchedulesForPlayer(id)?.Select(x => new CalenderDetailModel
+                ViewBag.gameschedulePlayer = _playerServices?.GetGameSchedulesForPlayer(id)?.Select(x => new CalenderDetailModel
                 {
                     Id = x.Id,
                     Title = x.Name,
@@ -98,6 +100,17 @@ namespace SchedulingApplication.Controllers
 
             // call service
             var result = await _playerServices.AddPlayer(data);
+
+            var playerdata = new User
+            {
+                FirstName = data.PlayerName,
+                LastName = data.PlayerName,
+                Email = data.EmailAddress,
+                RoleId = 4,
+                Password = data.EmailAddress,
+            };
+
+            var registerPlayer = await _userServices.RegisterUser(playerdata);
 
             return Json(new
             {
