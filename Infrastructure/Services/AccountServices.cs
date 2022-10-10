@@ -13,7 +13,7 @@ namespace SchedulingApplication.Infrastructure.Services
 	public class AccountServices : IAccountServices
 	{
 		private readonly SchedulingApplicationContext _dbContext;
-		protected static IHttpContextAccessor _httpContextAccessor;
+		protected static IHttpContextAccessor? _httpContextAccessor;
 
 		public AccountServices(SchedulingApplicationContext dbContext, IHttpContextAccessor httpContextAccessor)
 		{

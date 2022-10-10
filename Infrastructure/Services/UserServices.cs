@@ -7,18 +7,20 @@ namespace SchedulingApplication.Infrastructure.Services
     public class UserServices : IUserServices
     {
         private readonly SchedulingApplicationContext _dbContext;
+        private readonly IEmailServices _emailService;
 
-        public UserServices(SchedulingApplicationContext dbContext)
-        {
-            _dbContext = dbContext;  
-        }
+        public UserServices(SchedulingApplicationContext dbContext, IEmailServices emailService)
+		{
+			_dbContext = dbContext;
+			_emailService = emailService;
+		}
 
-        /// <summary>
-        /// Rregister user
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        public async Task<bool> RegisterUser(User entity)
+		/// <summary>
+		/// Rregister user
+		/// </summary>
+		/// <param name="entity"></param>
+		/// <returns></returns>
+		public async Task<bool> RegisterUser(User entity)
         {
             try
             {

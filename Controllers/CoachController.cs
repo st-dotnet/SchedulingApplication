@@ -13,15 +13,17 @@ namespace SchedulingApplication.Controllers
     public class CoachController : Controller
     {
         private readonly ICoachServices _coachServices;
+        private readonly IUserServices _userServices;
         private readonly IMapper _mapper;
 
-        public CoachController(ICoachServices coachServices, IMapper mapper)
-        {
-            _coachServices = coachServices;
-            _mapper = mapper;
-        }
+        public CoachController(ICoachServices coachServices, IMapper mapper, IUserServices userServices)
+		{
+			_coachServices = coachServices;
+			_mapper = mapper;
+			_userServices = userServices;
+		}
 
-        public IActionResult Index()
+		public IActionResult Index()
         {
             return View();
         }
@@ -32,6 +34,17 @@ namespace SchedulingApplication.Controllers
             var data = _mapper.Map<Coach>(model);
             data.Image = model.BaseImage?.ToBase64String();
             var result = await _coachServices.AddCoach(data);
+
+            var coachData = new User
+            {
+                FirstName = model.Name,
+                LastName = data.Name,
+                Email = data.EmailAddress,
+                RoleId = 3,
+                Password = data.EmailAddress,
+            };
+
+            var registerCoachData = await _userServices.RegisterUser(coachData);
 
             return Json(new
             {
