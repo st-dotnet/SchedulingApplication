@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@{
+	var claims = User.Claims.ToList();
+
+	var role = claims.Where(c => c.Type == ClaimTypes.Role)
+							.Select(c => c.Value).SingleOrDefault();
+
+	
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -47,49 +56,75 @@
 							<!--begin::Menu-->
 							<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true">
 								
-								<div class="menu-item">
-									<a class="menu-link active" href="/Dashboard/Index">
-										<span class="menu-icon">
-											<i class="bi bi-grid fs-3"></i>
-										</span>
-										<span class="menu-title">Dashboard</span>
-									</a>
-								</div>
-
-								<div class="menu-item">
-									<a class="menu-link" href="/Coach/Index">
-										<span class="menu-icon">
-											<i class="bi bi-grid fs-3"></i>
-										</span>
-										<span class="menu-title">All Coaches</span>
-									</a>
-								</div>
+								@if(role == "Admin")
+								{
+									<div class="menu-item">
+										<a class="menu-link active" href="/Dashboard/Index">
+											<span class="menu-icon">
+												<i class="bi bi-grid fs-3"></i>
+											</span>
+											<span class="menu-title">Dashboard</span>
+										</a>
+									</div>
 
 									<div class="menu-item">
-									<a class="menu-link" href="/Player/Index">
-										<span class="menu-icon">
-											<i class="bi bi-grid fs-3"></i>
-										</span>
-										<span class="menu-title">All Players</span>
-									</a>
-								</div>
+										<a class="menu-link" href="/Coach/Index">
+											<span class="menu-icon">
+												<i class="bi bi-grid fs-3"></i>
+											</span>
+											<span class="menu-title">All Coaches</span>
+										</a>
+									</div>
 
-								<div class="menu-item">
-									<a class="menu-link" href="/Team/Index/">
-										<span class="menu-icon">
-											<i class="bi bi-window fs-3"></i>
-										</span>
-										<span class="menu-title">All Teams</span>
-									</a>
-								</div>
-								<div class="menu-item">
-									<a class="menu-link" href="/PlayerCorner/Index/">
-										<span class="menu-icon">
-											<i class="bi bi-window fs-3"></i>
-										</span>
-										<span class="menu-title">Player Corner</span>
-									</a>
-								</div>
+									<div class="menu-item">
+										<a class="menu-link" href="/Player/Index">
+											<span class="menu-icon">
+												<i class="bi bi-grid fs-3"></i>
+											</span>
+											<span class="menu-title">All Players</span>
+										</a>
+									</div>
+
+									<div class="menu-item">
+										<a class="menu-link" href="/Team/Index/">
+											<span class="menu-icon">
+												<i class="bi bi-window fs-3"></i>
+											</span>
+											<span class="menu-title">All Teams</span>
+										</a>
+									</div>
+
+									<div class="menu-item">
+										<a class="menu-link" href="/PlayerCorner/Index/">
+											<span class="menu-icon">
+												<i class="bi bi-window fs-3"></i>
+											</span>
+											<span class="menu-title">Player Corner</span>
+										</a>
+									</div>
+								} 
+
+								@if(role == "Coach"){
+									<div class="menu-item">
+										<a class="menu-link active" href="/Dashboard/Index">
+											<span class="menu-icon">
+												<i class="bi bi-grid fs-3"></i>
+											</span>
+											<span class="menu-title">Dashboard</span>
+										</a>
+									</div>
+								}
+								
+								@if(role == "Player"){
+									<div class="menu-item">
+										<a class="menu-link" href="/PlayerCorner/Index/">
+											<span class="menu-icon">
+												<i class="bi bi-window fs-3"></i>
+											</span>
+											<span class="menu-title">Player Corner</span>
+										</a>
+									</div>
+								}
 								
 
 							</div>
