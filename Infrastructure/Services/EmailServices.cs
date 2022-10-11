@@ -27,11 +27,11 @@ namespace SchedulingApplication.Infrastructure.Services
 		{
 			try
 			{
-				int port = 2525;
-				string host = "smtp.mailtrap.io";
-				string username = "848cf23ccb195c";
-				string password = "a19adf8e82dfc8";
-				string mailFrom = "rahulkatoch2000@gmail.com";
+				int port = 587;
+				string host = "smtp.office365.com";
+				string username = "mohit.saini@supremetechnologiesindia.com";
+				string password = "Sot88670";
+				string mailFrom = "mohit.saini@supremetechnologiesindia.com";
 				string mailTo = to;
 				string mailTitle = subject;
 				string mailMessage = html;
