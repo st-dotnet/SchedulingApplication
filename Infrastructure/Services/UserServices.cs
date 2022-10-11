@@ -37,7 +37,7 @@ namespace SchedulingApplication.Infrastructure.Services
                     entity.CreatedBy = entity.Id;
                     _dbContext.Users.Add(entity);
                     await _dbContext.SaveChangesAsync();
-                    //_emailService.Send("st.amit.ranaa@gmail.com","Email Verification","<h1>Email</h1>");
+                    _emailService.Send(entity.Email,"Email Verification","<h1>Email</h1>");
                 }
                 else
                     return false;

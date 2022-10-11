@@ -73,10 +73,17 @@ namespace SchedulingApplication.Controllers
 				var callback = Url.Action(nameof(ResetPassword), "Account", new { email = encryptedEmail }, Request.Scheme);
 				
 				var message = $"Please clink on the below link to change your password. {Environment.NewLine}  {callback}";
-				_emailService?.Send(forgotPasswordModel?.Email, "Password Change Email", message);
+				var result = _emailService?.Send(forgotPasswordModel?.Email, "Password Change Email", message);
 
+				return Json(new
+				{
+					Success = result
+				});
 			}
-			return RedirectToAction(nameof(ForgotPasswordConfirmation));
+			return Json(new
+			{
+				Success = false
+			});
 		}
 
 		public IActionResult ForgotPasswordConfirmation()
