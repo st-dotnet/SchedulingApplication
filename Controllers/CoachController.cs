@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Helpers;
 using SchedulingApplication.Infrastructure.Interface;
+using SchedulingApplication.Infrastructure.Services;
 using SchedulingApplication.Models;
 
 namespace SchedulingApplication.Controllers
@@ -14,13 +15,16 @@ namespace SchedulingApplication.Controllers
     {
         private readonly ICoachServices _coachServices;
         private readonly IUserServices _userServices;
-        private readonly IMapper _mapper;
+		private readonly IEmailServices _emailServices;
+		private readonly IMapper _mapper;
 
-        public CoachController(ICoachServices coachServices, IMapper mapper, IUserServices userServices)
+        public CoachController(ICoachServices coachServices, IMapper mapper, IUserServices userServices, IEmailServices emailServices)
 		{
 			_coachServices = coachServices;
 			_mapper = mapper;
 			_userServices = userServices;
+			_emailServices = emailServices;
+
 		}
 
 		public IActionResult Index()
@@ -46,7 +50,14 @@ namespace SchedulingApplication.Controllers
 
             var registerCoachData = await _userServices.RegisterUser(coachData);
 
-            return Json(new
+			var encryptedEmail = EncryptDecryptUtil.Encrypt(model.EmailAddress);
+			var callback = Url.Action("VerifyUser", "User", new { email = encryptedEmail }, Request.Scheme);
+
+			var message = $"Please click  on the below link to acctivate your User. {Environment.NewLine}  {callback}";
+			_emailServices?.Send(model?.EmailAddress, "Verify User", message);
+
+
+			return Json(new
             {
                 Success = result
             });

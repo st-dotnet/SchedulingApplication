@@ -89,7 +89,7 @@ var KTUsersAddUser = function () {
                                     // Show popup confirmation 
                                     console.log(data);
                                     Swal.fire({
-                                        text: "Form has been successfully submitted!",
+                                        text: "Player has been registered Successfully! An email has been sent on youe registered email address.Please click on th link and activate your account",
                                         icon: "success",
                                         buttonsStyling: false,
                                         confirmButtonText: "Ok, got it!",

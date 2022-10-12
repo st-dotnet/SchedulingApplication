@@ -15,12 +15,14 @@ namespace SchedulingApplication.Controllers
         private readonly IPlayerServices _playerServices;
         private readonly IMapper _mapper;
         private readonly IUserServices _userServices;
+		private readonly IEmailServices _emailServices;
 
-        public PlayerController(IPlayerServices playerServices, IMapper mapper, IUserServices userServices)
+		public PlayerController(IPlayerServices playerServices, IMapper mapper, IUserServices userServices, IEmailServices emailServices)
 		{
 			_playerServices = playerServices;
 			_mapper = mapper;
 			_userServices = userServices;
+            _emailServices = emailServices;
 		}
 
 		public IActionResult Index()
@@ -112,7 +114,13 @@ namespace SchedulingApplication.Controllers
 
             var registerPlayer = await _userServices.RegisterUser(playerdata);
 
-            return Json(new
+			var encryptedEmail = EncryptDecryptUtil.Encrypt(model.EmailAddress);
+			var callback = Url.Action("VerifyUser", "User", new { email = encryptedEmail }, Request.Scheme);
+
+			var message = $"Please click  on the below link to acctivate your User. {Environment.NewLine}  {callback}";
+			_emailServices?.Send(model?.EmailAddress, "Verify User", message);
+
+			return Json(new
             {
                 Success = result
             });
