@@ -69,7 +69,6 @@ var KTPasswordResetNewPassword = function () {
             e.preventDefault();
             validator.revalidateField('password');
             console.log("Submit button Clicked");
-            debugger;
 
             validator.validate().then(function (status) {
                 if (status === 'Valid') {

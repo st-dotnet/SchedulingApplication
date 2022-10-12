@@ -4,6 +4,8 @@ using SchedulingApplication.Infrastructure.Interface;
 using SchedulingApplication.Data.Entities;
 using SchedulingApplication.Models;
 using Microsoft.AspNetCore.Authorization;
+using SchedulingApplication.Helpers;
+using SchedulingApplication.Infrastructure.Services;
 
 namespace SchedulingApplication.Controllers
 {
@@ -31,11 +33,37 @@ namespace SchedulingApplication.Controllers
         {
             
             var data = _mapper.Map<User>(model);
-            var result =await _userServices.RegisterUser(data);
+			var result = await _userServices.RegisterUser(data);
+            if (result == true)
+            {
+				var encryptedEmail = EncryptDecryptUtil.Encrypt(model.Email);
+				var callback = Url.Action(nameof(VerifyUser), "User", new { email = encryptedEmail }, Request.Scheme);
 
-            return Json(new {
+				var message = $"Please click  on the below link to acctivate your User. {Environment.NewLine}  {callback}";
+				_emailService?.Send(model?.Email, "Verify User", message);
+
+			}
+
+			return Json(new {
             Success = result
             });
         }
-    }
+		#region Verify user
+
+		//Verify and active user
+		[HttpGet]
+		public async Task<IActionResult> VerifyUser(string email)
+		{
+			var userEmail = EncryptDecryptUtil.Decrypt(email);
+			var response = await _userServices.ActiveUser(userEmail);
+            return Redirect("ChangePassWord");
+		}
+
+		public IActionResult ChangePassWord()
+		{
+			return View();
+		}
+
+		#endregion
+	}
 }

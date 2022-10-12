@@ -8,5 +8,6 @@ namespace SchedulingApplication.Infrastructure.Interface
         Task<bool> RegisterUser(User model);
         //Get roles
         List<Role> GetRoles();
-    }
+		Task<bool> ActiveUser(string userEmail);
+	}
 }

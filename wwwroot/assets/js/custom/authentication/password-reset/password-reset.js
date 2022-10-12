@@ -26,7 +26,6 @@ var KTPasswordResetGeneral = function () {
                 }
             }), e.addEventListener("click", (function (o) {
                 o.preventDefault(), i.validate().then((function (i) {
-                    debugger;
                     var emailData = {
                         email: $('#Email').val()
                     };
@@ -37,7 +36,6 @@ var KTPasswordResetGeneral = function () {
                         type: 'POST',
                         data: emailData,
                         success: function (response) {
-                            debugger;
                             if (response.success == true) {
                                 (e.setAttribute("data-kt-indicator", "on"), e.disabled = !0, setTimeout((function () {
                                     e.removeAttribute("data-kt-indicator"), e.disabled = !1, Swal.fire({

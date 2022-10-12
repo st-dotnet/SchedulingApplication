@@ -1,15 +1,10 @@
 ﻿using Microsoft.Extensions.Options;
 using MimeKit;
-using MimeKit.Text;
 using SchedulingApplication.Infrastructure.Interface;
-using System.Net.Mail;
-using MailKit.Security;
-using FluentEmail.Core;
-using System.Net;
 
 namespace SchedulingApplication.Infrastructure.Services
 {
-    public class EmailServices : IEmailServices
+	public class EmailServices : IEmailServices
     {
         private IOptions<AppSettings> _appSettings;
 		private IOptions<MailKitEmailSenderOptions> _options;
@@ -29,9 +24,9 @@ namespace SchedulingApplication.Infrastructure.Services
 			{
 				int port = 587;
 				string host = "smtp.office365.com";
-				string username = "mohit.saini@supremetechnologiesindia.com";
-				string password = "Sot88670";
-				string mailFrom = "mohit.saini@supremetechnologiesindia.com";
+				string username = "rahul.katoch@supremetechnologiesindia.com";
+				string password = "Jat25962";
+				string mailFrom = "rahul.katoch@supremetechnologiesindia.com";
 				string mailTo = to;
 				string mailTitle = subject;
 				string mailMessage = html;
@@ -39,7 +34,7 @@ namespace SchedulingApplication.Infrastructure.Services
 				message.From.Add(new MailboxAddress(mailFrom, mailFrom));
 				message.To.Add(new MailboxAddress(mailTo, mailTo));
 				message.Subject = mailTitle;
-				message.Body = new TextPart("html") { Text = mailMessage };
+				message.Body = new TextPart("html") { Text = mailMessage};
 				using (var client = new MailKit.Net.Smtp.SmtpClient())
 				{
 					client.Connect(host, port, false);

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Nancy.ViewEngines;
 
 namespace SchedulingApplication.Infrastructure.Services
 {
@@ -28,11 +29,22 @@ namespace SchedulingApplication.Infrastructure.Services
 				var user = await _dbContext.Users
 					.Include(x => x.Role)
 					.FirstOrDefaultAsync(x => x.Email == model.Email);
+
 				if (user == null)
 				{
 					return new LoginResultModel
 					{
 						Message = "User email does not exist"
+					};
+				}
+
+				var activate = await _dbContext.Users.FirstOrDefaultAsync(x => x.IsActive == true);
+
+				if (activate?.IsActive == null)
+				{
+					return new LoginResultModel
+					{
+						Message = "Your user is not Activated"
 					};
 				}
 
