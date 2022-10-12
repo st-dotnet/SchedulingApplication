@@ -97,7 +97,7 @@ var KTModalCoachesAdd = function () {
                         success: function (response) {
                             console.log("validated!"), response.success ? (t.setAttribute("data-kt-indicator", "on"), t.disabled = !0, setTimeout((function () {
                                 t.removeAttribute("data-kt-indicator"), Swal.fire({
-                                    text: "Form has been successfully submitted!",
+                                    text: "Your account has been created Successfully.An Email link has been sent to your email address.Please click on the link to activate your account",
                                     icon: "success",
                                     buttonsStyling: !1,
                                     confirmButtonText: "Ok, got it!",
