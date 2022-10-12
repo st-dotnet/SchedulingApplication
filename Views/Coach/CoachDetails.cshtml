@@ -86,103 +86,6 @@
 										<!--end::Card-->
 									</div>
 									<!--end::Sidebar-->
-									<!--begin::Content-->
-									<div class="flex-lg-row-fluid ms-lg-15">
-										<!--begin:::Tabs-->
-										<ul class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-bold mb-8">
-											<!--begin:::Tab item-->
-											<li class="nav-item">
-												<a class="nav-link text-active-primary pb-4 active" data-bs-toggle="tab" href="#kt_customer_view_overview_tab">Overview</a>
-											</li>
-											<!--end:::Tab item-->
-											<!--begin:::Tab item-->
-											<li class="nav-item">
-												<a class="nav-link text-active-primary pb-4" data-bs-toggle="tab" href="#kt_customer_view_overview_events_and_logs_tab">Events &amp; Logs</a>
-											</li>
-											<!--end:::Tab item-->
-										</ul>
-										<!--end:::Tabs-->
-										<!--begin:::Tab content-->
-										<div class="tab-content" id="myTabContent">
-											<!--begin:::Tab pane-->
-											<div class="tab-pane fade show active" id="kt_customer_view_overview_tab" role="tabpanel">
-												<!--begin::Card-->
-												<div class="card pt-4 mb-6 mb-xl-9">
-													<!--begin::Card header-->
-													<div class="card-header border-0">
-														<!--begin::Card title-->
-														<div class="card-title">
-															<h2>Payment Records</h2>
-														</div>
-														<!--end::Card title-->
-													</div>
-													<!--end::Card header-->
-													<!--begin::Card body-->
-													<div class="card-body pt-0 pb-5">
-														<!--begin::Table-->
-														<table class="table align-middle table-row-dashed gy-5" id="kt_table_customers_payment">
-															<!--begin::Table head-->
-															<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
-																<!--begin::Table row-->
-																<tr class="text-start text-muted text-uppercase gs-0">
-																	<th class="min-w-100px">Invoice No.</th>
-																	<th>Status</th>
-																	<th>Amount</th>
-																	<th class="min-w-100px">Date</th>
-																	<th class="text-end min-w-100px pe-4">Actions</th>
-																</tr>
-																<!--end::Table row-->
-															</thead>
-															<!--end::Table head-->
-															<!--begin::Table body-->
-															<tbody class="fs-6 fw-bold text-gray-600">
-															</tbody>
-															<!--end::Table body-->
-														</table>
-														<!--end::Table-->
-													</div>
-													<!--end::Card body-->
-												</div>
-												<!--end::Card-->
-											</div>
-											<!--end:::Tab pane-->
-											<!--begin:::Tab pane-->
-											<div class="tab-pane fade" id="kt_customer_view_overview_events_and_logs_tab" role="tabpanel">
-												<!--begin::Card-->
-												<div class="card pt-4 mb-6 mb-xl-9">
-													<!--begin::Card header-->
-													<div class="card-header border-0">
-														<!--begin::Card title-->
-														<div class="card-title">
-															<h2>Logs</h2>
-														</div>
-														<!--end::Card title-->
-													</div>
-													<!--end::Card header-->
-													<!--begin::Card body-->
-													<div class="card-body py-0">
-														<!--begin::Table wrapper-->
-														<div class="table-responsive">
-															<!--begin::Table-->
-															<table class="table align-middle table-row-dashed fw-bold text-gray-600 fs-6 gy-5" id="kt_table_customers_logs">
-																<!--begin::Table body-->
-																<tbody>
-																</tbody>
-																<!--end::Table body-->
-															</table>
-															<!--end::Table-->
-														</div>
-														<!--end::Table wrapper-->
-													</div>
-													<!--end::Card body-->
-												</div>
-												<!--end::Card-->
-											</div>
-											<!--end:::Tab pane-->
-										</div>
-										<!--end:::Tab content-->
-									</div>
-									<!--end::Content-->
 								</div>
 								<!--end::Layout-->
 								<div class="modal fade" id="kt_modal_update_customer" tabindex="-1" aria-hidden="true">
@@ -215,33 +118,6 @@
 												<div class="modal-body py-10 px-lg-17">
 													<!--begin::Scroll-->
 													<div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_customer_header" data-kt-scroll-wrappers="#kt_modal_update_customer_scroll" data-kt-scroll-offset="300px">
-														<!--begin::Notice-->
-														<!--begin::Notice-->
-														<div class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
-															<!--begin::Icon-->
-															<!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
-															<span class="svg-icon svg-icon-2tx svg-icon-primary me-4">
-																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-																	<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
-																	<rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black" />
-																	<rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black" />
-																</svg>
-															</span>
-															<!--end::Svg Icon-->
-															<!--end::Icon-->
-															<!--begin::Wrapper-->
-															<div class="d-flex flex-stack flex-grow-1">
-																<!--begin::Content-->
-																<div class="fw-bold">
-																	<div class="fs-6 text-gray-700">Updating customer details will receive a privacy audit. For more info, please read our
-																	<a href="#">Privacy Policy</a></div>
-																</div>
-																<!--end::Content-->
-															</div>
-															<!--end::Wrapper-->
-														</div>
-														<!--end::Notice-->
-														<!--end::Notice-->
 														<!--begin::User toggle-->
 														<div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse" href="#kt_modal_update_customer_user_info" role="button" aria-expanded="false" aria-controls="kt_modal_update_customer_user_info">User Information
 														<span class="ms-2 rotate-180">
