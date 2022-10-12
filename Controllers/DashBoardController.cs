@@ -6,6 +6,7 @@ using SchedulingApplication.Infrastructure.Interface;
 namespace SchedulingApplication.Controllers
 {
     [Authorize(Roles = "Coach,Admin")]
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class DashBoardController : Controller
     {
         private readonly IPlayerServices _playerServices;
@@ -18,6 +19,7 @@ namespace SchedulingApplication.Controllers
             _mapper = mapper;
             _dashboardServices = dashboardServices; 
         }
+
 
         public IActionResult Index()
         {

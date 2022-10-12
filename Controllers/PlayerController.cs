@@ -10,6 +10,7 @@ using SchedulingApplication.Models;
 namespace SchedulingApplication.Controllers
 {
 	[Authorize(Roles = "Admin,Player, Coach")]
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class PlayerController : Controller
     {
         private readonly IPlayerServices _playerServices;

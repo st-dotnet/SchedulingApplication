@@ -10,6 +10,7 @@ using SchedulingApplication.Models;
 namespace SchedulingApplication.Controllers
 {
 	[Authorize(Roles = "Admin")]
+	[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
 	public class TeamController : Controller
 	{
 		private readonly ITeamService _teamService;

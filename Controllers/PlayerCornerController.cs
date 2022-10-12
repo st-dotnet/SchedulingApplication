@@ -5,6 +5,7 @@ using SchedulingApplication.Infrastructure.Interface;
 namespace SchedulingApplication.Controllers
 {
     [Authorize(Roles = "Admin,Player")]
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class PlayerCornerController : Controller
     {
 
