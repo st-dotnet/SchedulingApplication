@@ -9,6 +9,7 @@ using SchedulingApplication.Models;
 namespace SchedulingApplication.Controllers
 {
     [Authorize(Roles = "Admin,Coach")]
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
     public class GameScheduleController : Controller
     {
         private readonly IGameScheduleServices _gameScheduleServices;
@@ -52,6 +53,7 @@ namespace SchedulingApplication.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Coach")]
         public async Task<IActionResult> AddGameSchedule(GameScheduleModel model)
         {
 
@@ -65,6 +67,7 @@ namespace SchedulingApplication.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Coach")]
         public async Task<IActionResult> GetGameSchedules()
         {
             try
@@ -93,6 +96,7 @@ namespace SchedulingApplication.Controllers
         }
 
         [HttpDelete]
+        [Authorize(Roles = "Admin,Coach")]
         public async Task<IActionResult> DeleteGameSchedule(int id)
         {
             var result = await _gameScheduleServices.DeleteGameScheduleById(id);

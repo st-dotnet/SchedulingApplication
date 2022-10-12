@@ -12,6 +12,7 @@ using SchedulingApplication.Data.Entities;
 
 namespace SchedulingApplication.Controllers
 {
+	[ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
 	public class AccountController : Controller
 	{
 		private readonly IMapper _mapper;
@@ -193,11 +194,11 @@ namespace SchedulingApplication.Controllers
 		/// Logout from external google account
 		/// </summary>
 		/// <returns></returns>
-		public async Task<IActionResult> LogoutGoogle()
-		{
-			await HttpContext.SignOutAsync();
-			return RedirectToAction("Login");
-		}
+		//public async Task<IActionResult> LogoutGoogle()
+		//{
+		//	await HttpContext.SignOutAsync();
+		//	return RedirectToAction("Login");
+		//}
 		#endregion
 
 		#region Reset/Forgot password
