@@ -54,15 +54,35 @@ var KTSigninGeneral = function () {
                                         }
                                     }).then((function (e) {
                                         e.isConfirmed && (t.querySelector('[name="email"]').value = "", t.querySelector('[name="password"]').value = "")
-                                        if (response.result.message == "Admin") {
+                                        if (response.result.message === "Admin") {
                                             window.location = "/Dashboard/Index"
-                                        } else if (response.result.message == "Coach") {
+                                        } else if (response.result.message === "Coach") {
                                             window.location = "/GameSchedule/ScheduleGames"
                                         } else {
                                             window.location = "/PlayerCorner/Index"
                                         }
                                     }))
                                 }), 2e3))
+                            } else if (response.result.message === "Your user is not Activated") {
+                                Swal.fire({
+                                    text: "Your user is not Activated,Please Check your email and activate your account",
+                                    icon: "error",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                });
+                            } else if (response.result.message === "User email does not exist") {
+                                Swal.fire({
+                                    text: "This user does not exists",
+                                    icon: "error",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                });
                             }
                             else {
                                 Swal.fire({

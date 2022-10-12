@@ -112,7 +112,7 @@ var KTSignupGeneral = function () {
                     url: '/User/RegisterUser',
                     data: signUpformData,
                     success: function (data) {
-                        if (status == 'Valid') {
+                        if (status === 'Valid') {
                             // Show loading indication
                             submitButton.setAttribute('data-kt-indicator', 'on');
 
@@ -129,7 +129,7 @@ var KTSignupGeneral = function () {
                                 // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                                 Swal.fire({
 
-                                    text: "You have Registered Successfully!!",
+                                    text: "A Link has been sent to your registered email address.Please click on the link to activate your account",
                                     icon: "success",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok, got it!",
@@ -140,7 +140,6 @@ var KTSignupGeneral = function () {
                                     if (result.isConfirmed) {
                                         form.reset();  // reset form                    
                                         passwordMeter.reset();  // reset password meter
-                                        window.location = "/Account/Login";
                                         //form.submit();
                                     }
                                 });
